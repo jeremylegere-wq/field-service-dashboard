@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field Service Maintenance Command Centre : Interactive Dashboard (Synthetic Data)</title>
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f4f4f1; --surface:#fcfcfb; --line:#e3e2dc; --grid:#ecebe6;
+  --ink:#0b0b0b; --ink2:#52514e; --ink3:#7a7974;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#008300;
+  --good:#1a7f4b; --warn:#b26a00; --crit:#c0392b; --accent:#2a78d6;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --bg:#111110; --surface:#1a1a19; --line:#2c2c2a; --grid:#262624;
+    --ink:#f0efec; --ink2:#c3c2b7; --ink3:#908f87;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#0ca30c;
+    --good:#3fb97a; --warn:#e0a030; --crit:#ef6b5d; --accent:#3987e5;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#111110; --surface:#1a1a19; --line:#2c2c2a; --grid:#262624;
+  --ink:#f0efec; --ink2:#c3c2b7; --ink3:#908f87;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#0ca30c;
+  --good:#3fb97a; --warn:#e0a030; --crit:#ef6b5d; --accent:#3987e5; --shadow:none;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 18px 60px}
+header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+h1{font-size:22px;margin:0 0 2px;letter-spacing:-.01em}
+.sub{color:var(--ink2);font-size:13px;max-width:62ch}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--ink2);background:var(--surface);margin-right:6px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filters label{font-size:12px;color:var(--ink2);display:flex;flex-direction:column;gap:3px}
+select,button{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+button{cursor:pointer}
+button:hover,select:hover{border-color:var(--ink3)}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);margin:6px 0 18px}
+  .adj{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}.adj label{font-size:12px;color:var(--ink2);display:flex;flex-direction:column;gap:4px}.adj input{padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+.chk{display:flex;gap:8px;align-items:center;font-size:13px;margin-top:12px;color:var(--ink2)}
+nav.tabs .grp{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);align-self:center;padding:0 4px 0 14px;white-space:nowrap}
+nav.tabs .grp:first-child{padding-left:0}
+nav.tabs button{border:0;border-bottom:2px solid transparent;border-radius:0;background:none;padding:10px 14px;color:var(--ink2);white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+.grid{display:grid;gap:14px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:14px}
+.cols2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);min-width:0}
+.card h3{font-size:13px;margin:0 0 2px;color:var(--ink)}
+.card .note{font-size:12px;color:var(--ink3);margin:0 0 8px}
+.kpi .v{font-size:30px;font-weight:650;letter-spacing:-.02em;line-height:1.1;margin-top:4px}
+.kpi .l{font-size:12px;color:var(--ink2)}
+.kpi .d{font-size:12px;margin-top:4px;color:var(--ink2)}
+.pill{font-weight:600}
+.pill.good{color:var(--good)}.pill.warn{color:var(--warn)}.pill.crit{color:var(--crit)}
+.bar{height:8px;border-radius:99px;background:var(--grid);position:relative;margin-top:10px;overflow:visible}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--accent)}
+.bar b{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{fill:var(--ink2);font:11px system-ui,sans-serif}
+.axis line,.axis path{stroke:var(--grid)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:2px 0 6px;font-size:12px;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:6px;cursor:default}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{font-weight:600;color:var(--ink2);cursor:pointer;user-select:none;position:sticky;top:0;background:var(--surface)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{max-height:340px;overflow:auto;border-radius:8px}
+.sliders{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:6px}
+.sliders label{font-size:12px;color:var(--ink2)}
+.sliders input{width:100%;accent-color:var(--accent)}
+.sliders output{font-weight:650;color:var(--ink)}
+#tip{position:fixed;z-index:10;pointer-events:none;background:var(--ink);color:var(--bg);padding:6px 9px;border-radius:7px;font-size:12px;line-height:1.35;opacity:0;transition:opacity .08s;max-width:240px}
+.hidden{display:none}
+footer{margin-top:28px;color:var(--ink3);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
+.method{font-size:12.5px;color:var(--ink2)}
+.method code{background:var(--grid);padding:1px 5px;border-radius:4px;font-size:12px}
+@media (max-width:560px){.kpi .v{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <h1>Field Service Maintenance Command Centre</h1>
+    <div class="sub">Scheduled-maintenance planning, backlog, forecast and outreach for a multi-region field service operation.
+      <br><span class="badge">Synthetic data</span><span class="badge">Portfolio piece</span><span id="asof" class="badge"></span></div>
+  </div>
+  <div class="filters">
+    <label>Service team<select id="fTeam"></select></label>
+    <label>Modality<select id="fMod"></select></label>
+    <button id="reset" title="Clear filters">Reset</button>
+    <button id="theme" title="Toggle light/dark">Theme</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs" role="tablist"></nav>
+
+<main id="view"></main>
+
+<footer>
+  <div class="method" id="method"></div>
+  <p>All records are randomly generated for demonstration. Organisation, site, team and people names are fictional and do not correspond to any real entity. Built with plain HTML, CSS and SVG, with no external libraries or network calls.</p>
+</footer>
+</div>
+<div id="tip"></div>
+
+<script>
+/* ============================================================
+   1. SYNTHETIC DATA  (seeded, deterministic)
+   ============================================================ */
+const ASOF = new Date(2026,10,16); // 16 Nov 2026
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const R = rng(20261116);
+const rint=(a,b)=>Math.floor(R()*(b-a+1))+a;
+const pick=a=>a[Math.floor(R()*a.length)];
+const wpick=(a,w)=>{let s=w.reduce((x,y)=>x+y,0),r=R()*s;for(let i=0;i<a.length;i++){r-=w[i];if(r<=0)return a[i]}return a[a.length-1]};
+
+const TEAMS=["East","South","North","Central","West","Island"];
+const TEAMW=[.27,.22,.2,.07,.1,.14];
+const MODS=["CT","MR","X-Ray","Ultrasound"];
+const MODW=[.24,.2,.3,.26];
+const SITE_STEMS=["Riverbend","Hillcrest","Bayview","Summit","Parkside","Lakeside","Ridgeway","Meadowbrook","Cedar Park","Westfield","Oakdale","Stonebridge","Fairview","Kingsway","Marlow","Eastgate"];
+const SITE_TYPES=["Medical Centre","Regional Hospital","Imaging Clinic","Community Hospital","Diagnostic Centre"];
+const GEO={
+ East:[["Port Harlow",-33.87,151.21,4],["Kestrel Bay",-32.93,151.78,2],["Ashgrove Point",-34.43,150.89,2],["Millbrook",-33.28,149.10,1],["Dunmore",-35.12,147.37,1]],
+ South:[["Fairhaven",-37.81,144.96,4],["Thornbury",-38.15,144.36,2],["Eldridge",-36.76,144.28,1],["Harcourt",-37.56,143.85,1]],
+ North:[["Northgate",-27.47,153.03,4],["Sunhaven",-28.00,153.40,2],["Highmoor",-27.56,151.95,1],["Cape Verity",-19.26,146.82,2],["Reef Landing",-16.92,145.77,1]],
+ Central:[["Westmere",-34.93,138.60,3],["Stonefield",-37.83,140.78,1]],
+ West:[["Sandford",-31.95,115.86,4],["Quarry Bay",-33.33,115.64,1],["Redcliffe Flats",-30.75,121.47,1]],
+ Island:[["Harbour City",-36.85,174.76,4],["Greenfell",-37.79,175.28,1],["Windcrest",-41.29,174.78,2],["Rivermouth",-43.53,172.64,3],["Southhaven",-45.87,170.50,1]]};
+const SITES=[];const usedNames=new Set();let siteIdx=0;
+TEAMS.forEach(t=>GEO[t].forEach(c=>{for(let k=0;k<c[3];k++){let nm;do{nm=SITE_STEMS[Math.floor(R()*SITE_STEMS.length)]+" "+SITE_TYPES[Math.floor(R()*SITE_TYPES.length)]}while(usedNames.has(nm));usedNames.add(nm);
+  SITES.push({team:t,name:nm,city:c[0],lat:c[1]+(R()-.5)*.3,lon:c[2]+(R()-.5)*.3})}}));
+const PEOPLE=["Alex","Bianca","Callum","Dani","Elias","Farah","Gus","Hana","Imran","Jess","Kai","Lena"];
+const isBiz=d=>d.getDay()!==0&&d.getDay()!==6;
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const ym=d=>d.getFullYear()*100+d.getMonth();
+const MONTHSHORT=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function bizDaysIn(y,m){let c=0;const n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++)if(isBiz(new Date(y,m,i)))c++;return c}
+function bizElapsed(){let c=0;for(let i=1;i<=ASOF.getDate();i++)if(isBiz(new Date(ASOF.getFullYear(),ASOF.getMonth(),i)))c++;return c}
+
+const CFG={target:480,stretch:560,completion:.9,pull:.25};
+
+// ---- Maintenance jobs: closed (Jan-now), open this month, open next month, overdue
+const PM=[]; let pmId=100200;
+function newPM(o){const tm=wpick(TEAMS,TEAMW);const s=pick(SITES.filter(x=>x.team===tm));return Object.assign({id:"MJ-"+(pmId++),team:s.team,site:s.name,lat:s.lat,lon:s.lon,city:s.city,mod:wpick(MODS,MODW),sys:"SYS-"+rint(10000,99999)},o)}
+for(let m=0;m<=10;m++){
+  const days=[];const n=new Date(2026,m+1,0).getDate();
+  for(let i=1;i<=n;i++){const d=new Date(2026,m,i);if(isBiz(d)&&d<=ASOF)days.push(d)}
+  const base=m<10?rint(410,500):days.length*rint(23,25); // Nov: MTD
+  for(let k=0;k<base;k++){
+    const c=pick(days); const due=addDays(c,rint(-5,24));
+    PM.push(newPM({status:"Closed",closed:c,due}));
+  }
+}
+// open this month (due Nov 17-30 mostly), scheduled vs not
+for(let k=0;k<132;k++)PM.push(newPM({status:"Scheduled",due:addDays(ASOF,rint(1,14)),sched:addDays(ASOF,rint(1,14)),month:"this"}));
+for(let k=0;k<150;k++)PM.push(newPM({status:"Due - not scheduled",due:addDays(ASOF,rint(0,14)),month:"this"}));
+for(let k=0;k<118;k++)PM.push(newPM({status:"Scheduled",due:new Date(2026,11,rint(1,28)),sched:new Date(2026,11,rint(1,28)),month:"next"}));
+for(let k=0;k<172;k++)PM.push(newPM({status:"Due - not scheduled",due:new Date(2026,11,rint(1,28)),month:"next"}));
+// overdue
+for(let k=0;k<330;k++){const o=Math.floor(Math.pow(R(),1.9)*160)+1;PM.push(newPM({status:wpick(["Overdue - unscheduled","Overdue - scheduled","Overdue - awaiting parts"],[.55,.3,.15]),due:addDays(ASOF,-o),overdue:o}))}
+
+// ---- Requests / issues queue
+const RTYPES=["Access request","Data correction","Mover / leaver","Tooling issue","Reporting query"];
+const REQ=[];let rq=5000;
+for(let i=0;i<260;i++){
+  const type=wpick(RTYPES,[.2,.28,.12,.2,.2]);
+  const closed=R()<.82?true:false;const created=addDays(ASOF,closed?-rint(8,330):-Math.floor(Math.pow(R(),1.6)*45)); const res=Math.max(1,Math.round(Math.pow(R(),3.2)*9)+(type==="Mover / leaver"?1:0)); const sla=type==="Mover / leaver"?3:5;
+  const r={id:"REQ-"+(rq++),type,created,closed,res:closed?res:null,assignee:pick(PEOPLE),status:closed?"Closed":wpick(["New","In progress","Waiting on requester"],[.2,.55,.25]),team:wpick(TEAMS,TEAMW)};
+  r.slaMet=closed?(res<=sla):null; r.age=Math.round((ASOF-created)/864e5); REQ.push(r)
+}
+// ---- Booking-letter journeys (offer -> follow-ups -> confirmation) and the messages they generate
+const SENDERS=["Alex","Bianca","Callum","Dani","Elias","Farah"];
+const bizAdj=d=>{let x=new Date(d);while(!isBiz(x))x=addDays(x,1);return x>ASOF?new Date(ASOF):x};
+const JOUR=[],OUT=[];
+for(let i=0;i<2400;i++){
+  const team=wpick(TEAMS,TEAMW),mod=wpick(MODS,MODW),planner=wpick(SENDERS,[.22,.2,.2,.16,.12,.1]);
+  let age=Math.floor(R()*120);let offer=addDays(ASOF,-age);while(!isBiz(offer)){age--;offer=addDays(ASOF,-age)}if(age<0)continue;
+  const confDay=R()<(age>25?.93:.62)?(R()<.45?rint(1,4):rint(5,28)):null;
+  const fu=[];let nf=rint(4,9);
+  while((confDay==null||nf<confDay)&&nf<=age&&fu.length<2){fu.push({day:nf,onTime:nf<=6});nf+=rint(4,9)}
+  const conf=(confDay!=null&&confDay<=age)?confDay:null;
+  const last=Math.max(0,...fu.map(f=>f.day),conf==null?0:conf),since=age-last;
+  const reply=conf!=null?wpick(["Same day","1-2 days","3-5 days","6+ days"],[.18,.36,.28,.18]):(R()<.35?wpick(["1-2 days","3-5 days","6+ days"],[.3,.4,.3]):"No reply yet");
+  const outcome=conf!=null?(fu.length?"Confirmed after follow-up":"Confirmed first time"):age>20?"Cancellation due":since>5?"Open - out of guideline":"Open - in guideline";
+  const J={sys:"SYS-"+rint(10000,99999),team,mod,planner,offer,age,fu,conf,reply,outcome,since,rebook:R()<.18||fu.length>=2,
+    action:outcome==="Open - out of guideline"||outcome==="Cancellation due"?wpick(["Follow-up overdue","Needs phone call","Escalate to lead"],[.55,.3,.15]):"None"};
+  JOUR.push(J);
+  OUT.push({date:offer,type:"Offer",by:planner,team,mod,onTime:true});
+  fu.forEach(f=>OUT.push({date:bizAdj(addDays(offer,f.day)),type:"Follow-up",by:planner,team,mod,onTime:f.onTime}));
+  if(conf!=null)OUT.push({date:bizAdj(addDays(offer,conf)),type:"Booking confirmation",by:planner,team,mod,onTime:R()<.94});
+}
+// ---- Pending debriefs (visit finished, paperwork not closed)
+const PD=[];
+for(let i=0;i<290;i++){const tm=wpick(TEAMS,TEAMW);const st=pick(SITES.filter(x=>x.team===tm));
+  PD.push({id:"MJ-"+(pmId++),team:tm,site:st.name,lat:st.lat,lon:st.lon,mod:wpick(MODS,MODW),owner:pick(PEOPLE),age:Math.max(1,Math.floor(Math.pow(R(),1.7)*40)),status:wpick(["Visit complete - awaiting debrief","Part-complete - awaiting debrief"],[.72,.28]),fromSched:R()<.28})}
+// ---- Contractor ("vendor") assigned jobs, next 90 days
+const VENDORS=["Apex Field Services","Northwind Technical","BlueLine Mobile","Granite Service Co"];
+const VEND=[];
+for(let i=0;i<420;i++){const tm=wpick(TEAMS,TEAMW);const st=pick(SITES.filter(x=>x.team===tm));
+  VEND.push({id:"MJ-"+(pmId++),team:tm,site:st.name,lat:st.lat,lon:st.lon,mod:wpick(MODS,MODW),owner:wpick(VENDORS,[.35,.28,.22,.15]),status:R()<.22?"Assigned - unconfirmed":"Assigned - confirmed",days:rint(1,90)})}
+const PLAN=[["Nov",118,452],["Dec",96,388],["Jan",134,430],["Feb",151,468],["Mar",142,495]];
+// ---- Assigned, not confirmed (next 4 weeks)
+const ANC=[];
+for(let i=0;i<150;i++){const tm=wpick(TEAMS,TEAMW);const st=pick(SITES.filter(x=>x.team===tm));const d=rint(0,28);
+  ANC.push({id:"MJ-"+(pmId++),team:tm,site:st.name,lat:st.lat,lon:st.lon,mod:wpick(MODS,MODW),owner:pick(PEOPLE),days:d,bucket:d<=7?"Next 7 days":d<=14?"Next 2 weeks":d<=21?"Next 3 weeks":"Next 4 weeks",status:"Assigned, not confirmed with customer"})}
+// ---- Maintenance plans awaiting load
+const PLANLOAD=[];for(let i=0;i<238;i++)PLANLOAD.push({team:wpick(TEAMS,TEAMW),mod:wpick(MODS,MODW)});
+
+// ---- Planned jobs (planner output, next 120 days)
+const DUR={CT:2.5,MR:3.5,"X-Ray":1.5,Ultrasound:2};
+const PJ=[];
+for(let i=0;i<560;i++){const tm=wpick(TEAMS,TEAMW);const st=pick(SITES.filter(x=>x.team===tm));const mod=wpick(MODS,MODW);const days=rint(1,120);const cust=R()<.78,locked=R()<.6;
+  PJ.push({id:"PP-"+rint(40000,99999),team:tm,site:st.name,lat:st.lat,lon:st.lon,city:st.city,mod,days,cust,locked,hrs:DUR[mod]+1+R()*.8,status:days<=30?"Due ≤ 30 days":days<=60?"Due 31-60 days":days<=90?"Due 61-90 days":"Due 91+ days",
+    risk:!cust&&days<=14?"Critical - no contact, due ≤14d":!cust?"High - no customer contact":!locked?"Medium - not locked":"Low - contacted & locked"})}
+// ---- Planning-run protocol messages
+const PCAT=[["Capacity conflict",["Engineer double-booked","Visit exceeds shift"]],["Missing contract data",["No service contract","Contract expired"]],["Duration anomaly",["Duration missing","Duration > 2× standard"]],["Skill mismatch",["Skill not available","Certification lapsed"]],["Travel / geography",["Postcode not mapped","Zone boundary"]]];
+const PROT=[];
+for(let i=0;i<640;i++){const c=wpick(PCAT,[.26,.2,.2,.18,.16]);const sev=R()<.32?"ERROR":"WARNING";const tm=wpick(TEAMS,TEAMW);
+  PROT.push({code:"P-"+rint(1001,1060),team:tm,mod:wpick(MODS,MODW),cat:c[0],sub:pick(c[1]),sev,action:sev==="ERROR"||R()<.15,sys:"SYS-"+rint(10000,99999),age:Math.floor(Math.pow(R(),1.6)*120),run:R()<.68?"latest":"previous"})}
+const PROTB=a=>a<=30?"0-30":a<=60?"31-60":a<=90?"61-90":"90+";
+
+/* ============================================================
+   2. HELPERS
+   ============================================================ */
+const $=s=>document.querySelector(s);
+const el=(t,a={},h="")=>{const e=document.createElement(t);for(const k in a)e.setAttribute(k,a[k]);e.innerHTML=h;return e};
+const fmt=n=>Math.round(n).toLocaleString("en-AU");
+const pct=n=>(n*100).toFixed(0)+"%";
+const state={tab:"overview",team:"All",mod:"All",completion:CFG.completion,pull:CFG.pull,sort:{col:"overdue",dir:-1}};
+const tip=$("#tip");
+function showTip(e,html){tip.innerHTML=html;tip.style.opacity=1;const w=tip.offsetWidth,h=tip.offsetHeight;let x=e.clientX+14,y=e.clientY+14;if(x+w>innerWidth-8)x=e.clientX-w-14;if(y+h>innerHeight-8)y=e.clientY-h-14;tip.style.left=x+"px";tip.style.top=y+"px"}
+function hideTip(){tip.style.opacity=0}
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const MODCOL=()=>({CT:"var(--s1)",MR:"var(--s2)","X-Ray":"var(--s3)",Ultrasound:"var(--s4)"});
+const TEAMCOL=()=>({East:"var(--s1)",South:"var(--s2)",North:"var(--s3)",Central:"var(--s4)",West:"var(--s5)",Island:"var(--s6)"});
+const fPM=rows=>rows.filter(r=>(state.team==="All"||r.team===state.team)&&(state.mod==="All"||r.mod===state.mod));
+
+function legend(items,colmap){return `<div class="legend">${items.map(i=>`<span><i style="background:${colmap[i]}"></i>${i}</span>`).join("")}</div>`}
+function niceMax(v){const p=Math.pow(10,Math.floor(Math.log10(v||1)));const f=v/p;return(f<=1?1:f<=1.5?1.5:f<=2?2:f<=2.5?2.5:f<=3?3:f<=4?4:f<=5?5:f<=6?6:f<=8?8:10)*p}
+
+/* Generic SVG chart builders -------------------------------------------------- */
+function svgWrap(w,h,inner){return `<svg viewBox="0 0 ${w} ${h}" role="img">${inner}</svg>`}
+function yAxis(max,y0,y1,x0,x1,ticks=4,suffix=""){let s="";for(let i=0;i<=ticks;i++){const v=max*i/ticks,y=y0-(y0-y1)*i/ticks;s+=`<line x1="${x0}" x2="${x1}" y1="${y}" y2="${y}" stroke="var(--grid)"/><text x="${x0-6}" y="${y+4}" text-anchor="end">${fmt(v)}${suffix}</text>`}return s}
+
+// stacked columns: cats[], series[], data[cat][series]
+function stackedCols(host,cats,series,data,colmap,opts={}){
+  const W=host.clientWidth||520,H=opts.h||260,L=36,Rr=8,T=10,B=26;
+  const totals=cats.map((c,i)=>series.reduce((s,k)=>s+data[i][k],0));
+  const max=niceMax(Math.max(opts.target||0,...totals)*1.05);
+  const bw=(W-L-Rr)/cats.length,w=Math.min(34,bw*.66);
+  let g=yAxis(max,H-B,T,L,W-Rr);
+  cats.forEach((c,i)=>{
+    const x=L+bw*i+(bw-w)/2;let acc=0;
+    series.forEach((k,si)=>{const v=data[i][k];if(!v)return;const y1=H-B-(H-B-T)*acc/max,y2=H-B-(H-B-T)*(acc+v)/max;
+      g+=`<rect class="m" data-i="${i}" data-k="${k}" x="${x}" y="${y2}" width="${w}" height="${Math.max(0,y1-y2-1.5)}" rx="${si===series.length-1?3:0}" fill="${colmap[k]}"/>`;acc+=v});
+    g+=`<text x="${x+w/2}" y="${H-8}" text-anchor="middle">${c}</text>`;
+  });
+  if(opts.target){const y=H-B-(H-B-T)*opts.target/max;g+=`<line x1="${L}" x2="${W-Rr}" y1="${y}" y2="${y}" stroke="var(--ink)" stroke-dasharray="4 3"/><text x="${W-Rr}" y="${y-5}" text-anchor="end" style="fill:var(--ink)">Target ${fmt(opts.target)}</text>`}
+  host.innerHTML=(opts.legend===false?"":legend(series,colmap))+svgWrap(W,H,g);
+  host.querySelectorAll(".m").forEach(r=>{r.addEventListener("mousemove",e=>{const i=+r.dataset.i;showTip(e,`<b>${cats[i]}</b><br>${r.dataset.k}: ${fmt(data[i][r.dataset.k])}<br>Total: ${fmt(totals[i])}`)});r.addEventListener("mouseleave",hideTip)});
+}
+// horizontal bars
+function hbars(host,rows,colfn,opts={}){
+  const W=host.clientWidth||520,rh=28,H=rows.length*rh+8,L=opts.left||92,Rr=48;
+  const max=niceMax(Math.max(...rows.map(r=>r.v),opts.target||0)*1.02);
+  let g="";
+  rows.forEach((r,i)=>{const y=4+i*rh,w=(W-L-Rr)*r.v/max;
+    g+=`<text x="${L-8}" y="${y+rh/2+1}" text-anchor="end">${r.label}</text><rect class="m" data-i="${i}" x="${L}" y="${y+4}" width="${Math.max(1,w)}" height="${rh-12}" rx="4" fill="${colfn(r)}"/><text x="${L+w+6}" y="${y+rh/2+1}" style="fill:var(--ink)">${opts.fmt?opts.fmt(r.v):fmt(r.v)}</text>`});
+  if(opts.target){const x=L+(W-L-Rr)*opts.target/max;g+=`<line x1="${x}" x2="${x}" y1="0" y2="${H}" stroke="var(--ink)" stroke-dasharray="4 3"/>`}
+  host.innerHTML=svgWrap(W,H,g);
+  host.querySelectorAll(".m").forEach(r=>{r.addEventListener("mousemove",e=>{const d=rows[+r.dataset.i];showTip(e,`<b>${d.label}</b><br>${d.tip||(opts.fmt?opts.fmt(d.v):fmt(d.v))}`)});r.addEventListener("mouseleave",hideTip)});
+}
+// line chart with crosshair; series = [{name,color,values[]}]
+function lines(host,cats,series,opts={}){
+  const W=host.clientWidth||520,H=opts.h||240,L=40,Rr=14,T=10,B=26;
+  const max=opts.max||niceMax(Math.max(...series.flatMap(s=>s.values.filter(v=>v!=null)),opts.target||0)*1.08);
+  const min=opts.min||0;const xs=i=>L+(W-L-Rr)*i/(cats.length-1||1);const ys=v=>H-B-(H-B-T)*(v-min)/(max-min);
+  let g="";for(let i=0;i<=4;i++){const v=min+(max-min)*i/4,y=ys(v);g+=`<line x1="${L}" x2="${W-Rr}" y1="${y}" y2="${y}" stroke="var(--grid)"/><text x="${L-6}" y="${y+4}" text-anchor="end">${opts.pct?pct(v):fmt(v)}</text>`}
+  cats.forEach((c,i)=>{if(cats.length<=14||i%Math.ceil(cats.length/8)===0)g+=`<text x="${xs(i)}" y="${H-8}" text-anchor="middle">${c}</text>`});
+  if(opts.target!=null){const y=ys(opts.target);g+=`<line x1="${L}" x2="${W-Rr}" y1="${y}" y2="${y}" stroke="var(--ink)" stroke-dasharray="4 3"/><text x="${W-Rr}" y="${y-5}" text-anchor="end" style="fill:var(--ink)">${opts.targetLabel||"Target"}</text>`}
+  series.forEach(s=>{let d="";s.values.forEach((v,i)=>{if(v==null)return;d+=(d?"L":"M")+xs(i)+","+ys(v)});g+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.25" stroke-linejoin="round" stroke-linecap="round"/>`;});
+  g+=`<line id="xh" y1="${T}" y2="${H-B}" stroke="var(--ink3)" opacity="0"/><g id="dots"></g><rect id="hit" x="${L}" y="${T}" width="${W-L-Rr}" height="${H-B-T}" fill="transparent"/>`;
+  host.innerHTML=(series.length>1?`<div class="legend">${series.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join("")}</div>`:"")+svgWrap(W,H,g);
+  const hit=host.querySelector("#hit"),xh=host.querySelector("#xh"),dots=host.querySelector("#dots");
+  hit.addEventListener("mousemove",e=>{const b=hit.getBoundingClientRect();const rel=(e.clientX-b.left)/b.width*(W-L-Rr);const i=Math.max(0,Math.min(cats.length-1,Math.round(rel/((W-L-Rr)/(cats.length-1||1)))));
+    xh.setAttribute("x1",xs(i));xh.setAttribute("x2",xs(i));xh.setAttribute("opacity",1);
+    dots.innerHTML=series.map(s=>s.values[i]==null?"":`<circle cx="${xs(i)}" cy="${ys(s.values[i])}" r="4.5" fill="${s.color}" stroke="var(--surface)" stroke-width="2"/>`).join("");
+    showTip(e,`<b>${cats[i]}</b>`+series.map(s=>`<br>${s.name}: ${s.values[i]==null?"-":(opts.pct?pct(s.values[i]):fmt(s.values[i]))}`).join(""))});
+  hit.addEventListener("mouseleave",()=>{hideTip();xh.setAttribute("opacity",0);dots.innerHTML=""});
+}
+
+function gauge(host,o){ // o:{v,target,max,label,fmt,sub,thresholds:[{to,color}]}
+  const W=260,H=158,cx=130,cy=130,r=100,sw=22,f=o.fmt||fmt;
+  const ang=v=>Math.PI*(1-Math.min(1,Math.max(0,v/o.max)));
+  const pt=(a,rr)=>[cx+rr*Math.cos(a),cy-rr*Math.sin(a)];
+  const arc=(a0,a1,rr)=>{const[p0,p1]=[pt(a0,rr),pt(a1,rr)];return `M${p0[0]},${p0[1]} A${rr},${rr} 0 0 1 ${p1[0]},${p1[1]}`};
+  let g=`<path d="${arc(Math.PI,0,r)}" fill="none" stroke="var(--grid)" stroke-width="${sw}" stroke-linecap="round"/>`;
+  if(o.thresholds){let prev=0;o.thresholds.forEach(t=>{g+=`<path d="${arc(ang(prev),ang(t.to),r)}" fill="none" stroke="${t.color}" stroke-width="${sw}" opacity=".28"/>`;prev=t.to})}
+  if(o.v>0)g+=`<path class="m" d="${arc(Math.PI,ang(o.v),r)}" fill="none" stroke="${o.color||"var(--accent)"}" stroke-width="${sw}" stroke-linecap="round"/>`;
+  if(o.target!=null){const a=ang(o.target),p0=pt(a,r-sw/2-4),p1=pt(a,r+sw/2+4);g+=`<line x1="${p0[0]}" y1="${p0[1]}" x2="${p1[0]}" y2="${p1[1]}" stroke="var(--ink)" stroke-width="2.5"/>`}
+  g+=`<text x="${cx}" y="${cy-8}" text-anchor="middle" style="font-size:28px;font-weight:650;fill:var(--ink)">${f(o.v)}</text>`;
+  g+=`<text x="${cx}" y="${cy+12}" text-anchor="middle">${o.sub||""}</text><text x="${cx-r}" y="${cy+26}" text-anchor="middle">0</text><text x="${cx+r}" y="${cy+26}" text-anchor="middle">${f(o.max)}</text>`;
+  host.innerHTML=`<div style="text-align:center;font-size:13px;color:var(--ink2)">${o.label}</div><div style="max-width:300px;margin:0 auto">${svgWrap(W,H+10,g)}</div>`;
+  host.querySelectorAll(".m").forEach(m=>{m.addEventListener("mousemove",e=>showTip(e,`<b>${o.label}</b><br>${f(o.v)}${o.target!=null?`<br>Target: ${f(o.target)}`:""}`));m.addEventListener("mouseleave",hideTip)});
+}
+function donut(host,rows,colors){
+  const total=rows.reduce((s,r)=>s+r.v,0)||1,W=420,H=190,cx=95,cy=95,R=80,ri=50;let a=-Math.PI/2,g="";
+  rows.forEach((r,i)=>{const a1=a+2*Math.PI*r.v/total,large=a1-a>Math.PI?1:0;const P=(an,rr)=>[cx+rr*Math.cos(an),cy+rr*Math.sin(an)];
+    const [x0,y0]=P(a,R),[x1,y1]=P(a1-.012,R),[x2,y2]=P(a1-.012,ri),[x3,y3]=P(a,ri);
+    g+=`<path class="m" data-i="${i}" d="M${x0},${y0} A${R},${R} 0 ${large} 1 ${x1},${y1} L${x2},${y2} A${ri},${ri} 0 ${large} 0 ${x3},${y3}Z" fill="${colors[i%colors.length]}"/>`;a=a1;
+    g+=`<rect x="205" y="${22+i*30}" width="10" height="10" rx="3" fill="${colors[i%colors.length]}"/><text x="222" y="${31+i*30}" style="fill:var(--ink)">${r.label}</text><text x="410" y="${31+i*30}" text-anchor="end">${fmt(r.v)} · ${pct(r.v/total)}</text>`});
+  g+=`<text x="${cx}" y="${cy+4}" text-anchor="middle" style="font-size:20px;font-weight:650;fill:var(--ink)">${fmt(total)}</text>`;
+  host.innerHTML=svgWrap(W,H,g);
+  host.querySelectorAll(".m").forEach(m=>{const d=rows[+m.dataset.i];m.addEventListener("mousemove",e=>showTip(e,`<b>${d.label}</b><br>${fmt(d.v)} (${pct(d.v/total)})`));m.addEventListener("mouseleave",hideTip)});
+}
+function heat(host,rowsL,colsL,grid,opts={}){
+  const lw=opts.lw||110,W=host.clientWidth||900,cw=(W-lw-8)/colsL.length,ch=opts.ch||32,hue=opts.color||"var(--s1)";
+  const mx=Math.max(1,...grid.flat());let g="";
+  colsL.forEach((n,c)=>g+=`<text x="${lw+c*cw+cw/2}" y="12" text-anchor="middle">${n}</text>`);
+  rowsL.forEach((t,r)=>{const y=20+r*ch;g+=`<text x="${lw-8}" y="${y+ch/2+4}" text-anchor="end">${t}</text>`;
+    grid[r].forEach((v,c)=>{const a=.1+.9*v/mx;g+=`<rect class="m" data-r="${r}" data-c="${c}" x="${lw+c*cw+1}" y="${y+1}" width="${cw-2}" height="${ch-2}" rx="4" fill="${hue}" opacity="${a}"/><text x="${lw+c*cw+cw/2}" y="${y+ch/2+4}" text-anchor="middle" style="fill:${a>.55?"#fff":"var(--ink)"};pointer-events:none">${v}</text>`})});
+  host.innerHTML=svgWrap(W,20+rowsL.length*ch+4,g);
+  host.querySelectorAll(".m").forEach(m=>{m.addEventListener("mousemove",e=>showTip(e,`<b>${rowsL[+m.dataset.r]} · ${colsL[+m.dataset.c]}</b><br>${grid[+m.dataset.r][+m.dataset.c]}${opts.unit||""}`));m.addEventListener("mouseleave",hideTip)});
+}
+
+function funnel(host,rows,colors){
+  const W=520,rh=46,H=rows.length*rh+4,mx=Math.max(1,...rows.map(r=>r.v));let g="";
+  rows.forEach((r,i)=>{const w=Math.max(40,(W-120)*r.v/mx),x=(W-w)/2,y=i*rh+2;
+    g+=`<rect class="m" data-i="${i}" x="${x}" y="${y}" width="${w}" height="${rh-8}" rx="6" fill="${colors[i%colors.length]}"/><text x="${W/2}" y="${y+(rh-8)/2+4}" text-anchor="middle" style="fill:#fff;font-weight:600;font-size:12px;pointer-events:none">${r.label} · ${fmt(r.v)}${i?" ("+pct(r.v/rows[0].v)+" of offers)":""}</text>`});
+  host.innerHTML=svgWrap(W,H,g);
+  host.querySelectorAll(".m").forEach(m=>{const d=rows[+m.dataset.i];m.addEventListener("mousemove",e=>showTip(e,`<b>${d.label}</b><br>${fmt(d.v)}${d.tip?"<br>"+d.tip:""}`));m.addEventListener("mouseleave",hideTip)});
+}
+function treemap(host,items,colors,opts={}){
+  const W=host.clientWidth||520,H=opts.h||250,rects=[];const list=items.filter(i=>i.v>0).sort((a,b)=>b.v-a.v);
+  (function lay(l,x,y,w,h){if(!l.length)return;if(l.length===1){rects.push({...l[0],x,y,w,h});return}
+    const tot=l.reduce((a,b)=>a+b.v,0);let acc=0,k=0;while(k<l.length-1&&acc+l[k].v<=tot/2){acc+=l[k].v;k++}if(k===0){acc=l[0].v;k=1}
+    const a=l.slice(0,k),b=l.slice(k),f=acc/tot;
+    if(w>=h){lay(a,x,y,w*f,h);lay(b,x+w*f,y,w*(1-f),h)}else{lay(a,x,y,w,h*f);lay(b,x,y+h*f,w,h*(1-f))}})(list,0,0,W,H);
+  let g="";rects.forEach((r,i)=>{g+=`<rect class="m" data-i="${i}" x="${r.x+1}" y="${r.y+1}" width="${Math.max(0,r.w-2)}" height="${Math.max(0,r.h-2)}" rx="6" fill="${(r.color||colors[i%colors.length])}"/>`;
+    if(r.w>70&&r.h>34)g+=`<text x="${r.x+10}" y="${r.y+20}" style="fill:#fff;font-weight:600;font-size:12px;pointer-events:none">${r.label}</text><text x="${r.x+10}" y="${r.y+36}" style="fill:#fff;opacity:.9;font-size:11px;pointer-events:none">${fmt(r.v)}</text>`});
+  host.innerHTML=svgWrap(W,H,g);
+  host.querySelectorAll(".m").forEach(m=>{const d=rects[+m.dataset.i];m.addEventListener("mousemove",e=>showTip(e,`<b>${d.label}</b><br>${fmt(d.v)} · ${pct(d.v/(list.reduce((a,b)=>a+b.v,0)))}`));m.addEventListener("mouseleave",hideTip)});
+}
+function combo(host,cats,bars,lns,opts={}){
+  const W=host.clientWidth||520,H=opts.h||280,L=46,Rr=10,T=10,B=26;
+  const all=[...bars.flatMap(b=>b.values),...lns.flatMap(l=>l.values.filter(v=>v!=null))];const max=niceMax(Math.max(...all)*1.08);
+  const bw=(W-L-Rr)/cats.length,k=bars.length,w=Math.min(18,bw*.8/k);const ys=v=>H-B-(H-B-T)*v/max;
+  let g=yAxis(max,H-B,T,L,W-Rr);
+  cats.forEach((c,i)=>{const cx=L+bw*i+bw/2;bars.forEach((b,bi)=>{const x=cx-(k*w)/2+bi*w,y=ys(b.values[i]);g+=`<rect x="${x}" y="${y}" width="${w-1.5}" height="${Math.max(0,H-B-y)}" rx="3" fill="${b.color}" opacity="${b.op?b.op(i):1}"/>`});
+    if(cats.length<=18||i%2===0)g+=`<text x="${cx}" y="${H-8}" text-anchor="middle">${c}</text>`});
+  lns.forEach(l=>{let d="";l.values.forEach((v,i)=>{if(v!=null)d+=(d?"L":"M")+(L+bw*i+bw/2)+","+ys(v)});g+=`<path d="${d}" fill="none" stroke="${l.color}" stroke-width="2.25" ${l.dash?'stroke-dasharray="5 3"':""} stroke-linecap="round" stroke-linejoin="round"/>`});
+  g+=`<line id="xh" y1="${T}" y2="${H-B}" stroke="var(--ink3)" opacity="0"/><rect id="hit" x="${L}" y="${T}" width="${W-L-Rr}" height="${H-B-T}" fill="transparent"/>`;
+  host.innerHTML=`<div class="legend">${[...bars,...lns].map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join("")}</div>`+svgWrap(W,H,g);
+  const hit=host.querySelector("#hit"),xh=host.querySelector("#xh");
+  hit.addEventListener("mousemove",e=>{const b=hit.getBoundingClientRect();const i=Math.max(0,Math.min(cats.length-1,Math.floor((e.clientX-b.left)/b.width*cats.length)));xh.setAttribute("x1",L+bw*i+bw/2);xh.setAttribute("x2",L+bw*i+bw/2);xh.setAttribute("opacity",.6);
+    showTip(e,`<b>${cats[i]}</b>`+[...bars,...lns].map(s=>`<br>${s.name}: ${s.values[i]==null?"-":fmt(s.values[i])}`).join(""))});
+  hit.addEventListener("mouseleave",()=>{hideTip();xh.setAttribute("opacity",0)});
+}
+
+function bulletRow(label,v,target,color,hint){
+  const max=Math.max(v,target)*1.25,p=v/max*100,t=target/max*100;const ratio=v/target;
+  const st=ratio>=1?["good","✔ On track"]:ratio>=.8?["warn","▲ Near target"]:["crit","▼ Below target"];
+  return `<div style="margin:10px 0 16px"><div style="display:flex;justify-content:space-between;font-size:13px"><span>${label}</span><span><b>${fmt(v)}</b> / ${fmt(target)} <span class="pill ${st[0]}">${st[1]}</span></span></div><div class="bar"><i style="width:${p}%;background:${color}"></i><b style="left:${t}%"></b></div>${hint?`<div class="note" style="margin-top:6px">${hint}</div>`:""}</div>`
+}
+
+/* ============================================================
+   3. METRICS (mirrors the original DAX logic)
+   ============================================================ */
+function metrics(){
+  const rows=fPM(PM);
+  const closedThis=rows.filter(r=>r.status==="Closed"&&ym(r.closed)===ym(ASOF));
+  const mtd=closedThis.length,el=bizElapsed(),tot=bizDaysIn(ASOF.getFullYear(),ASOF.getMonth()),rem=tot-el;
+  const avg=el?mtd/el:0;
+  const schedThis=rows.filter(r=>r.month==="this"&&r.status==="Scheduled").length;
+  const dueThis=rows.filter(r=>r.month==="this"&&r.status==="Due - not scheduled").length;
+  const predSched=schedThis*state.completion;
+  const predUnsch=Math.min(dueThis,rem*avg*state.pull);
+  const forecast=mtd+predSched+predUnsch;
+  const schedNext=rows.filter(r=>r.month==="next"&&r.status==="Scheduled").length;
+  const dueNext=rows.filter(r=>r.month==="next"&&r.status==="Due - not scheduled").length;
+  const fcNext=schedNext*state.completion+dueNext*state.pull;
+  const overdue=rows.filter(r=>r.overdue);
+  const pdRows=fPM(PD),atRisk=pdRows.filter(r=>r.fromSched).length;
+  const predSchedNet=Math.max(0,predSched-atRisk),forecastNet=mtd+predSchedNet+predUnsch;
+  // scale targets when filtered so comparisons stay meaningful
+  const share=PM.length?rows.filter(r=>r.status==="Closed").length/PM.filter(r=>r.status==="Closed").length:1;
+  return {pdRows,atRisk,predSchedNet,forecastNet,rows,mtd,el,tot,rem,avg,schedThis,dueThis,predSched,predUnsch,forecast,schedNext,dueNext,fcNext,overdue,share,target:Math.round(CFG.target*share),stretch:Math.round(CFG.stretch*share)}
+}
+function monthlyClosures(rows){
+  const out=[];for(let m=0;m<=10;m++){const r={m:MONTHSHORT[m]};MODS.forEach(k=>r[k]=0);rows.filter(x=>x.status==="Closed"&&x.closed.getMonth()===m).forEach(x=>r[x.mod]++);out.push(r)}return out}
+function reqStats(){
+  const rows=REQ.filter(r=>state.team==="All"||r.team===state.team);
+  const open=rows.filter(r=>!r.closed),closed=rows.filter(r=>r.closed);
+  const sla=closed.length?closed.filter(r=>r.slaMet).length/closed.length:0;
+  const avgRes=closed.length?closed.reduce((s,r)=>s+r.res,0)/closed.length:0;
+  return {rows,open,closed,sla,avgRes}
+}
+
+/* ============================================================
+   4. VIEWS
+   ============================================================ */
+const TABS=[["overview","Overview","Operations"],["map","Map","Operations"],["overdue","Overdue Jobs","Operations"],["debriefs","Pending Debriefs","Operations"],["throughput","Throughput","Operations"],["health","Health Wall","Operations"],["forecast","Forecast","Planning"],["capacity","Capacity Model","Planning"],["planned","Planned Jobs","Planning"],["protocols","Planning Protocols","Planning"],["letters","Booking Letters","Customers & vendors"],["outreach","Outreach","Customers & vendors"],["vendors","Contractors & Assigned Jobs","Customers & vendors"],["requests","Requests & SLA","Customers & vendors"]];
+function kpi(l,v,d,extra=""){return `<div class="card kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d}</div>${extra}</div>`}
+
+const VIEWS={
+overview(host){
+  const m=metrics(),rs=reqStats();
+  const ratio=m.forecast/m.target;const st=ratio>=1?["good","On target"]:ratio>=.9?["warn","Slightly behind"]:["crit","Behind target"];
+  host.innerHTML=`
+  <div class="grid kpis">
+    ${kpi("Maintenance jobs closed this month",fmt(m.mtd),`${m.avg.toFixed(1)} per business day · ${m.el} of ${m.tot} days elapsed`)}
+    ${kpi("Forecast completions (end of month)",fmt(m.forecast),`<span class="pill ${st[0]}">${pct(ratio)} of target</span> · target ${fmt(m.target)}`,`<div class="bar"><i style="width:${Math.min(100,m.forecast/m.stretch*100)}%"></i><b style="left:${m.target/m.stretch*100}%"></b></div>`)}
+    ${kpi("Overdue Jobs",fmt(m.overdue.length),`${fmt(m.overdue.filter(r=>r.overdue>90).length)} are more than 90 days late`)}
+    ${kpi("Request SLA compliance",pct(rs.sla),`${fmt(rs.open.length)} open · avg ${rs.avgRes.toFixed(1)} business days to resolve`)}
+  </div>
+  <div class="grid cols2">
+    <div class="card"><h3>Monthly job completions by modality</h3><p class="note">2026 year to date · dashed line = monthly target</p><div id="c1"></div></div>
+    <div class="card"><h3>Overdue backlog by service team</h3><p class="note">Hover a bar for the age profile</p><div id="c2"></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><h3>Forecast vs target</h3><p class="note">End-of-month completions forecast · marker = target, scale ends at stretch</p><div id="g1"></div></div>
+    <div class="card"><h3>Overdue backlog health</h3><p class="note">Green ≤ 250 · amber ≤ 450 · red above</p><div id="g2"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>What this dashboard shows</h3>
+   <p class="note" style="margin:6px 0 0">Fourteen views over one planning data model, grouped into operations, planning and customers & vendors: a geographic map, backlog ageing, pending-debrief and contractor tracking, a what-if completion forecast and an engineer-capacity model (move the sliders on the Forecast and Capacity tabs), planning-run protocols, booking-letter journeys, a threshold health wall, historical throughput, an internal request queue with SLA tracking, and customer outreach adherence. Use the filters at the top to slice every view by team and modality.</p></div>`;
+  const mc=monthlyClosures(m.rows);
+  stackedCols($("#c1"),mc.map(x=>x.m),MODS,mc,MODCOL(),{target:m.target,h:270});
+  const byTeam=TEAMS.map(t=>{const o=m.overdue.filter(r=>r.team===t);return {label:t,v:o.length,tip:`${o.length} overdue<br>Avg ${o.length?Math.round(o.reduce((s,r)=>s+r.overdue,0)/o.length):0} days late<br>${o.filter(r=>r.overdue>90).length} over 90 days`}});
+  hbars($("#c2"),byTeam,r=>TEAMCOL()[r.label]);
+  gauge($("#g1"),{v:m.forecast,target:m.target,max:m.stretch,label:"Forecast completions",sub:`target ${fmt(m.target)}`,color:m.forecast>=m.target?"var(--good)":m.forecast>=m.target*.9?"var(--warn)":"var(--crit)"});
+  const bs=m.share||1;
+  gauge($("#g2"),{v:m.overdue.length,target:250*bs,max:500*bs,label:"Overdue jobs",sub:"backlog",thresholds:[{to:250*bs,color:"var(--good)"},{to:450*bs,color:"var(--warn)"},{to:500*bs,color:"var(--crit)"}],color:m.overdue.length<=250*bs?"var(--good)":m.overdue.length<=450*bs?"var(--warn)":"var(--crit)"});
+},
+overdue(host){
+  const m=metrics();const o=m.overdue;
+  const B=[["0-30",0,30],["31-60",31,60],["61-90",61,90],["90+",91,1e9]];
+  const bucketCol={"0-30":"var(--s3)","31-60":"var(--s4)","61-90":"var(--s2)","90+":"var(--crit)"};
+  host.innerHTML=`
+  <div class="grid kpis">
+    ${kpi("Overdue Jobs",fmt(o.length),"jobs past their due date")}
+    ${kpi("Average days overdue",o.length?Math.round(o.reduce((s,r)=>s+r.overdue,0)/o.length):0,"across the filtered backlog")}
+    ${kpi("Over 90 days",fmt(o.filter(r=>r.overdue>90).length),`<span class="pill crit">▼ Needs escalation</span>`)}
+    ${kpi("Awaiting parts",fmt(o.filter(r=>r.status.includes("parts")).length),"blocked outside planning's control")}
+  </div>
+  <div class="grid cols2">
+    <div class="card"><h3>Overdue jobs by age bucket</h3><p class="note">Days past due date</p><div id="c1"></div></div>
+    <div class="card"><h3>Age profile by service team</h3><p class="note">Stacked by age bucket</p><div id="c2"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>Overdue matrix : life-cycle status × days overdue</h3><p class="note">Darker = more jobs · hover for counts</p><div id="hm"></div></div>
+  <div class="card" style="margin-top:14px"><h3>Overdue job list</h3><p class="note">Click a column header to sort · showing the 60 most relevant rows</p><div class="tablewrap"><table id="tbl"></table></div></div>`;
+  hbars($("#c1"),B.map(([n,a,b])=>{const c=o.filter(r=>r.overdue>=a&&r.overdue<=b).length;return {label:n+" days",v:c,col:bucketCol[n],tip:`${c} cases (${o.length?pct(c/o.length):"0%"})`}}),r=>r.col,{left:92});
+  const data=TEAMS.map(t=>{const x={};B.forEach(([n,a,b])=>x[n]=o.filter(r=>r.team===t&&r.overdue>=a&&r.overdue<=b).length);return x});
+  stackedCols($("#c2"),TEAMS,B.map(b=>b[0]),data,bucketCol,{h:250});
+  const STAT=["Overdue - unscheduled","Overdue - scheduled","Overdue - awaiting parts"];
+  heat($("#hm"),STAT,B.map(b=>b[0]+" days"),STAT.map(st=>B.map(([n,a,b])=>o.filter(r=>r.status===st&&r.overdue>=a&&r.overdue<=b).length)),{lw:150,color:"var(--s2)",unit:" jobs"});
+  const cols=[["id","Job"],["team","Team"],["site","Site"],["mod","Modality"],["status","Status"],["overdue","Days overdue"]];
+  const tbl=$("#tbl");
+  function draw(){const s=state.sort;const rows=[...o].sort((a,b)=>(a[s.col]>b[s.col]?1:-1)*s.dir).slice(0,60);
+    tbl.innerHTML=`<thead><tr>${cols.map(([k,l])=>`<th data-k="${k}" class="${k==="overdue"?"n":""}">${l}${s.col===k?(s.dir>0?" ▲":" ▼"):""}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr><td>${r.id}</td><td>${r.team}</td><td>${r.site}</td><td>${r.mod}</td><td>${r.status}</td><td class="n">${r.overdue}</td></tr>`).join("")}</tbody>`;
+    tbl.querySelectorAll("th").forEach(th=>th.onclick=()=>{const k=th.dataset.k;state.sort={col:k,dir:state.sort.col===k?-state.sort.dir:-1};draw()})}
+  draw();
+},
+forecast(host){
+  host.innerHTML=`
+  <div class="card"><h3>Scenario assumptions</h3><p class="note">Adjust the two conversion rates to see how the end-of-month forecast responds.</p>
+   <div class="sliders">
+    <label>Completion rate : share of already-scheduled jobs that complete <output id="o1"></output><input id="s1" type="range" min="50" max="100" value="${Math.round(state.completion*100)}"></label>
+    <label>Pull-through rate : share of unscheduled demand converted to completions <output id="o2"></output><input id="s2" type="range" min="0" max="100" value="${Math.round(state.pull*100)}"></label>
+   </div></div>
+  <div id="fc" style="margin-top:14px"></div>`;
+  const draw=()=>{
+    const m=metrics();
+    $("#o1").textContent=pct(state.completion);$("#o2").textContent=pct(state.pull);
+    const ratio=m.forecast/m.target;
+    $("#fc").innerHTML=`
+    <div class="grid kpis">
+      ${kpi("Completed so far",fmt(m.mtd),`${m.el} business days elapsed`)}
+      ${kpi("+ From scheduled work",fmt(m.predSched),`${fmt(m.schedThis)} scheduled × ${pct(state.completion)}`)}
+      ${kpi("+ From unscheduled work",fmt(m.predUnsch),`capped by ${fmt(m.dueThis)} due-not-scheduled`)}
+      ${kpi("= Forecast completions",fmt(m.forecast),`<span class="pill ${ratio>=1?"good":ratio>=.9?"warn":"crit"}">${ratio>=1?"✔":ratio>=.9?"▲":"▼"} ${pct(ratio)} of ${fmt(m.target)} target</span>`)}
+    </div>
+    <div class="card" style="margin-bottom:14px"><h3>Debrief risk : gross vs net forecast</h3><p class="note">${fmt(m.atRisk)} scheduled jobs have a debrief still pending, so their completion is at risk. Net forecast removes them from the scheduled contribution.</p><div id="fn"></div></div>
+    <div class="grid cols2" style="margin-bottom:14px">
+      <div class="card"><div id="fg"></div></div>
+      <div class="card"><h3>Headroom to stretch target</h3><p class="note">How far each lever could move the forecast</p><div id="fh"></div></div>
+    </div>
+    <div class="grid cols2">
+      <div class="card"><h3>This month : build-up to forecast</h3><p class="note">Target and stretch shown for reference</p><div id="b1"></div></div>
+      <div class="card"><h3>Next month : early outlook</h3><p class="note">${fmt(m.schedNext)} scheduled × ${pct(state.completion)} + ${fmt(m.dueNext)} unscheduled × ${pct(state.pull)}</p><div id="b2"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3>How the forecast works</h3>
+     <p class="note" style="margin:6px 0 0">Forecast = completions to date + (scheduled jobs × completion rate) + min(unscheduled jobs, remaining business days × current daily close rate × pull-through rate). The cap stops the model promising more closures than there is demand for.</p></div>`;
+    hbars($("#fn"),[{label:"Gross forecast",v:m.forecast,tip:`${fmt(m.forecast)} completions`},{label:"At risk (debrief)",v:Math.min(m.atRisk,m.predSched),tip:`${fmt(Math.min(m.atRisk,m.predSched))} completions at risk`},{label:"Net forecast",v:m.forecastNet,tip:`${fmt(m.forecastNet)} completions`},{label:"Target",v:m.target}],r=>({"Gross forecast":"var(--s1)","Net forecast":"var(--accent)","At risk (debrief)":"var(--s2)",Target:"var(--ink3)"}[r.label]),{left:116});
+    gauge($("#fg"),{v:m.forecast,target:m.target,max:m.stretch,label:"Forecast completions this month",sub:`target ${fmt(m.target)}`,color:ratio>=1?"var(--good)":ratio>=.9?"var(--warn)":"var(--crit)"});
+    hbars($("#fh"),[{label:"Gap to target",v:Math.max(0,m.target-m.forecast)},{label:"Gap to stretch",v:Math.max(0,m.stretch-m.forecast)},{label:"Unscheduled left",v:Math.max(0,m.dueThis-m.predUnsch)}],r=>"var(--s2)",{left:116});
+    hbars($("#b1"),[{label:"Completed to date",v:m.mtd},{label:"Scheduled",v:m.predSched},{label:"Unscheduled",v:m.predUnsch},{label:"Forecast",v:m.forecast},{label:"Target",v:m.target},{label:"Stretch",v:m.stretch}],r=>({Forecast:"var(--accent)",Target:"var(--ink3)",Stretch:"var(--ink3)"}[r.label]||"var(--s3)"),{left:104});
+    hbars($("#b2"),[{label:"From scheduled",v:m.schedNext*state.completion},{label:"From unscheduled",v:m.dueNext*state.pull},{label:"Forecast",v:m.fcNext},{label:"Target",v:m.target}],r=>({Forecast:"var(--accent)",Target:"var(--ink3)"}[r.label]||"var(--s3)"),{left:104});
+  };
+  $("#s1").oninput=e=>{state.completion=e.target.value/100;draw()};
+  $("#s2").oninput=e=>{state.pull=e.target.value/100;draw()};
+  draw();
+},
+throughput(host){
+  const m=metrics();const closed=m.rows.filter(r=>r.status==="Closed");
+  const mc=monthlyClosures(m.rows);
+  host.innerHTML=`
+  <div class="grid kpis">
+    ${kpi("Completed year to date",fmt(closed.length),"all completed jobs")}
+    ${kpi("Best month",fmt(Math.max(...mc.slice(0,10).map(x=>MODS.reduce((s,k)=>s+x[k],0)))),"2026 full months")}
+    ${kpi("On-time completion rate",pct(closed.filter(r=>r.closed<=r.due).length/(closed.length||1)),"completed on or before due date")}
+  </div>
+  <div class="grid cols2">
+    <div class="card"><h3>Completions per month</h3><p class="note">Stacked by modality · November is month-to-date</p><div id="c1"></div></div>
+    <div class="card"><h3>On-time rate trend</h3><p class="note">Share completed on or before due date</p><div id="c2"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>Completions by service team and month</h3><p class="note">Darker = more closures</p><div id="heat"></div></div>`;
+  stackedCols($("#c1"),mc.map(x=>x.m),MODS,mc,MODCOL(),{target:m.target,h:270});
+  const ot=MONTHSHORT.slice(0,11).map((_,i)=>{const c=closed.filter(r=>r.closed.getMonth()===i);return c.length?c.filter(r=>r.closed<=r.due).length/c.length:null});
+  lines($("#c2"),MONTHSHORT.slice(0,11),[{name:"On-time rate",color:"var(--s1)",values:ot}],{pct:true,max:1,min:.4,h:270});
+  const grid=TEAMS.map(t=>MONTHSHORT.slice(0,11).map((_,i)=>closed.filter(r=>r.team===t&&r.closed.getMonth()===i).length));
+  heat($("#heat"),TEAMS,MONTHSHORT.slice(0,11),grid,{unit:" completions",lw:80,ch:30});
+},
+requests(host){
+  const s=reqStats();
+  host.innerHTML=`
+  <div class="grid kpis">
+    ${kpi("Open requests",fmt(s.open.length),`${fmt(s.open.filter(r=>r.age>14).length)} older than 14 days`)}
+    ${kpi("Closed requests",fmt(s.closed.length),"year to date")}
+    ${kpi("SLA compliance",pct(s.sla),`<span class="pill ${s.sla>=.9?"good":s.sla>=.8?"warn":"crit"}">${s.sla>=.9?"✔ Meeting 90% goal":s.sla>=.8?"▲ Near 90% goal":"▼ Below 90% goal"}</span>`)}
+    ${kpi("Avg resolution",s.avgRes.toFixed(1)+" days","business days, closed requests")}
+  </div>
+  <div class="grid cols2">
+    <div class="card"><h3>Requests by type</h3><p class="note">All requests, open and closed</p><div id="c1"></div></div>
+    <div class="card"><h3>Open requests by age</h3><p class="note">Days since created</p><div id="c2"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>SLA compliance by month</h3><p class="note">Closed requests, by month created · dashed = 90% goal</p><div id="c3"></div></div>
+  <div class="card" style="margin-top:14px"><h3>Open queue</h3><div class="tablewrap"><table id="t"></table></div></div>`;
+  donut($("#c1"),RTYPES.map(t=>({label:t,v:s.rows.filter(r=>r.type===t).length})),["var(--s1)","var(--s2)","var(--s3)","var(--s4)","var(--s5)"]);
+  const AG=[["0-7",0,7],["8-14",8,14],["15-30",15,30],["30+",31,1e9]];
+  hbars($("#c2"),AG.map(([n,a,b])=>({label:n+" days",v:s.open.filter(r=>r.age>=a&&r.age<=b).length})),r=>r.label.startsWith("30")?"var(--crit)":"var(--s2)",{left:92});
+  const mi=[...Array(11).keys()];
+  lines($("#c3"),MONTHSHORT.slice(0,11),[{name:"SLA met",color:"var(--s3)",values:mi.map(i=>{const c=s.closed.filter(r=>r.created.getMonth()===i);return c.length?c.filter(r=>r.slaMet).length/c.length:null})}],{pct:true,max:1,min:.4,target:.9,targetLabel:"90% goal",h:230});
+  $("#t").innerHTML=`<thead><tr><th>Request</th><th>Type</th><th>Assigned to</th><th>Status</th><th class="n">Age (days)</th></tr></thead><tbody>${[...s.open].sort((a,b)=>b.age-a.age).slice(0,40).map(r=>`<tr><td>${r.id}</td><td>${r.type}</td><td>${r.assignee}</td><td>${r.status}</td><td class="n">${r.age}</td></tr>`).join("")}</tbody>`;
+},
+outreach(host){
+  const rows=OUT.filter(r=>(state.team==="All"||r.team===state.team)&&(state.mod==="All"||r.mod===state.mod));
+  const w=rows.filter(r=>r.date>addDays(ASOF,-7));
+  const offers=w.filter(r=>r.type==="Offer").length,confs=w.filter(r=>r.type==="Booking confirmation").length,fu=w.filter(r=>r.type==="Follow-up").length;
+  const share=rows.length/OUT.length;
+  const tO=Math.round(130*share),tC=Math.round(100*share);
+  const adh=rows.length?rows.filter(r=>r.onTime).length/rows.length:0;
+  host.innerHTML=`
+  <div class="grid cols2">
+    <div class="card"><h3>Last 7 days vs weekly targets</h3><p class="note">Customer offers and booking confirmations sent · marker = target</p><div class="grid cols2" style="gap:6px"><div id="go"></div><div id="gc"></div></div></div>
+    <div class="card kpi"><h3>Follow-up cadence adherence</h3><div class="v">${pct(adh)}</div><div class="d">messages sent within the agreed window · <span class="pill ${adh>=.9?"good":"warn"}">${adh>=.9?"✔ Meets 90% goal":"▲ Below 90% goal"}</span></div><div class="bar"><i style="width:${adh*100}%"></i><b style="left:90%"></b></div><p class="note" style="margin-top:10px">${fmt(fu)} follow-ups sent in the last 7 days.</p></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><h3>Messages sent per day</h3><p class="note">Last 8 weeks, by type</p><div id="c1"></div></div>
+    <div class="card"><h3>Activity by sender</h3><p class="note">Offers, follow-ups and confirmations</p><div id="c2"></div></div>
+  </div>`;
+  gauge($("#go"),{v:offers,target:tO,max:Math.round(tO*1.2),label:"Offers sent",sub:`target ${tO}`,color:offers>=tO?"var(--good)":offers>=tO*.8?"var(--warn)":"var(--crit)"});
+  gauge($("#gc"),{v:confs,target:tC,max:Math.round(tC*1.2),label:"Booking confirmations",sub:`target ${tC}`,color:confs>=tC?"var(--good)":confs>=tC*.8?"var(--warn)":"var(--crit)"});
+  const days=[...Array(56).keys()].map(i=>addDays(ASOF,-55+i)).filter(isBiz);
+  const T=["Offer","Follow-up","Booking confirmation"];const TC={Offer:"var(--s1)","Follow-up":"var(--s2)","Booking confirmation":"var(--s3)"};
+  lines($("#c1"),days.map(d=>d.getDate()+" "+MONTHSHORT[d.getMonth()]),T.map(t=>({name:t,color:TC[t],values:days.map(d=>rows.filter(r=>r.type===t&&+r.date===+d).length)})),{h:250});
+  const sd=SENDERS.map(s=>{const o={};T.forEach(t=>o[t]=rows.filter(r=>r.by===s&&r.type===t).length);return o});
+  stackedCols($("#c2"),SENDERS,T,sd,TC,{h:250});
+}};
+
+const LAND={
+ aus:[[-10.7,142.5],[-12.0,143.1],[-14.5,143.9],[-16.5,145.3],[-18.9,146.3],[-20.5,148.7],[-22.4,150.6],[-24.5,152.0],[-26.5,153.1],[-28.6,153.6],[-30.3,153.1],[-32.5,152.5],[-34.3,151.0],[-36.9,150.1],[-37.5,149.9],[-38.0,147.5],[-38.4,146.3],[-38.8,146.4],[-38.3,144.9],[-38.4,143.5],[-38.1,141.0],[-37.2,139.7],[-35.6,138.5],[-34.9,137.5],[-33.9,137.0],[-32.5,137.8],[-33.6,135.8],[-32.2,133.0],[-31.7,131.2],[-32.3,127.5],[-33.9,124.0],[-34.0,121.5],[-34.9,118.0],[-34.3,115.2],[-33.5,115.0],[-31.9,115.7],[-29.5,114.9],[-26.5,113.4],[-24.0,113.4],[-22.0,114.1],[-20.5,118.5],[-19.0,121.5],[-17.5,122.2],[-15.5,124.5],[-14.0,126.0],[-14.5,128.0],[-12.5,130.0],[-11.5,132.5],[-12.0,136.8],[-14.0,135.5],[-15.5,136.5],[-17.5,139.5],[-17.5,141.5],[-14.8,141.6],[-12.5,141.7]],
+ tas:[[-40.7,144.7],[-40.9,148.2],[-42.5,148.3],[-43.6,146.9],[-43.0,145.3],[-41.2,144.7]],
+ nzN:[[-34.4,173.0],[-35.7,174.5],[-36.9,175.0],[-37.7,176.2],[-37.6,178.0],[-39.0,177.9],[-39.9,176.9],[-41.6,176.0],[-41.3,174.8],[-40.4,175.0],[-39.3,173.8],[-38.0,174.7],[-36.5,174.4],[-35.2,173.6]],
+ nzS:[[-40.5,172.7],[-41.2,174.2],[-42.5,173.6],[-43.6,172.8],[-44.4,171.2],[-46.4,169.8],[-46.6,168.3],[-45.5,166.6],[-44.0,168.5],[-42.7,170.5],[-41.3,172.0]]};
+const proj=(lat,lon)=>[(lon-112)*.87*13.4,(-10-lat)*13.4];
+const landPath=k=>"M"+LAND[k].map(([a,b])=>proj(a,b).map(v=>v.toFixed(1)).join(",")).join("L")+"Z";
+const CITYLBL=[["Port Harlow",-33.87,151.21],["Fairhaven",-37.81,144.96],["Northgate",-27.47,153.03],["Sandford",-31.95,115.86],["Westmere",-34.93,138.6],["Harbour City",-36.85,174.76],["Rivermouth",-43.53,172.64]];
+
+Object.assign(VIEWS,{
+map(host){
+  const metrics_=["Overdue jobs","Pending debriefs","Contractor jobs","Planned jobs (120d)"];
+  const metric=state.mapMetric||metrics_[0];const m=metrics();
+  const src=metric==="Overdue jobs"?m.overdue:metric==="Pending debriefs"?fPM(PD):metric==="Contractor jobs"?fPM(VEND):fPM(PJ);
+  const by={};src.forEach(r=>{const o=by[r.site]=by[r.site]||{site:r.site,team:r.team,city:r.city||"",lat:r.lat,lon:r.lon,n:0,st:{}};o.n++;o.st[r.status]=(o.st[r.status]||0)+1});
+  const sites=Object.values(by).sort((a,b)=>b.n-a.n);const maxN=Math.max(1,...sites.map(x=>x.n));
+  const sts=[...new Set(src.map(r=>r.status))].sort();const SC={};sts.forEach((x,i)=>SC[x]=["var(--s1)","var(--s2)","var(--s4)","var(--s3)"][i%4]);
+  const reg=TEAMS.map(t=>({label:t,v:src.filter(r=>r.team===t).length}));
+  const top=reg.slice().sort((a,b)=>b.v-a.v)[0];
+  host.innerHTML=`
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px" id="seg">${metrics_.map(x=>`<button data-m="${x}" ${x===metric?'style="border-color:var(--accent);font-weight:600"':""}>${x}</button>`).join("")}</div>
+  <div class="grid kpis">${kpi(metric,fmt(src.length),"across the filtered view")}${kpi("Sites affected",fmt(sites.length),`of ${fmt(SITES.length)} sites`)}${kpi("Most affected region",top?top.label:"-",top?`${fmt(top.v)} · ${src.length?pct(top.v/src.length):"0%"} of total`:"")}</div>
+  <div class="grid" style="grid-template-columns:minmax(0,2fr) minmax(280px,1fr);gap:14px">
+    <div class="card"><h3>${metric} by site</h3><p class="note">Bubble size = volume · colour = dominant status · hover for detail · site positions are approximate and fictional</p><div id="mp"></div></div>
+    <div class="card"><h3>By region</h3><p class="note">Share of the ${metric.toLowerCase()} total</p><div id="rg"></div><div id="lg" style="margin-top:10px"></div></div>
+  </div>`;
+  host.querySelectorAll("#seg button").forEach(b=>b.onclick=()=>{state.mapMetric=b.dataset.m;render()});
+  let g=Object.keys(LAND).map(k=>`<path d="${landPath(k)}" fill="var(--grid)" stroke="var(--line)" stroke-width="1"/>`).join("");
+  CITYLBL.forEach(([n,la,lo])=>{const [x,y]=proj(la,lo);g+=`<text x="${x+(lo>170?-8:8)}" y="${y+16}" text-anchor="${lo>170?"end":"start"}" style="font-size:10px;fill:var(--ink3)">${n}</text>`});
+  sites.slice().sort((a,b)=>b.n-a.n).forEach((o,i)=>{const [x,y]=proj(o.lat,o.lon);const dom=Object.entries(o.st).sort((a,b)=>b[1]-a[1])[0][0];const r=4+22*Math.sqrt(o.n/maxN);
+    g+=`<circle class="m" data-i="${i}" cx="${x}" cy="${y}" r="${r}" fill="${SC[dom]}" fill-opacity=".72" stroke="var(--surface)" stroke-width="1.5"/>`});
+  const ord=sites.slice().sort((a,b)=>b.n-a.n);
+  $("#mp").innerHTML=svgWrap(800,500,g);
+  $("#mp").querySelectorAll(".m").forEach(c=>{const o=ord[+c.dataset.i];c.addEventListener("mousemove",e=>showTip(e,`<b>${o.site}</b><br>${o.city?o.city+" · ":""}${o.team}<br>${fmt(o.n)} ${metric.toLowerCase()}<br>`+Object.entries(o.st).map(([k,v])=>`${k}: ${v}`).join("<br>")));c.addEventListener("mouseleave",hideTip)});
+  hbars($("#rg"),reg,r=>TEAMCOL()[r.label],{left:62});
+  $("#lg").innerHTML=legend(sts,SC);
+},
+debriefs(host){
+  const rows=fPM(PD),m=metrics(),sh=m.share||1;
+  const AB=[["0-1",0,1],["2-3",2,3],["4-7",4,7],["8-14",8,14],["15+",15,1e9]];
+  const owners={};rows.forEach(r=>owners[r.owner]=(owners[r.owner]||0)+1);
+  const ow=Object.entries(owners).sort((a,b)=>b[1]-a[1]);
+  host.innerHTML=`
+  <div class="grid kpis">
+    ${kpi("Pending debriefs",fmt(rows.length),"visits complete, paperwork open")}
+    ${kpi("Older than 7 days",fmt(rows.filter(r=>r.age>7).length),`<span class="pill crit">▼ ${rows.length?pct(rows.filter(r=>r.age>7).length/rows.length):"0%"} of pending</span>`)}
+    ${kpi("Oldest",rows.length?Math.max(...rows.map(r=>r.age))+" days":"-","since visit ended")}
+    ${kpi("Scheduled-job risk",fmt(m.atRisk),"pending debriefs that threaten this month's forecast")}
+  </div>
+  <div class="grid cols2">
+    <div class="card"><div id="g"></div></div>
+    <div class="card"><h3>Pending debriefs by age</h3><p class="note">Days since the visit ended</p><div id="ab"></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><h3>Pareto by technician</h3><p class="note">Who holds the most open debriefs</p><div id="pa"></div></div>
+    <div class="card"><h3>Cumulative share</h3><p class="note">How concentrated the backlog is : top technicians account for…</p><div id="cu"></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><h3>By region</h3><div id="dn"></div></div>
+    <div class="card"><h3>Top sites</h3><p class="note">Sites with the most pending debriefs</p><div id="ts"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>Oldest pending debriefs</h3><div class="tablewrap"><table id="t"></table></div></div>`;
+  const tgt=Math.round(300*sh),mx=Math.round(500*sh);
+  gauge($("#g"),{v:rows.length,target:tgt,max:mx,label:"Pending debriefs vs target",sub:`target ${tgt}`,thresholds:[{to:tgt,color:"var(--good)"},{to:tgt*1.33,color:"var(--warn)"},{to:mx,color:"var(--crit)"}],color:rows.length<=tgt?"var(--good)":rows.length<=tgt*1.33?"var(--warn)":"var(--crit)"});
+  hbars($("#ab"),AB.map(([n,a,b])=>({label:n+" days",v:rows.filter(r=>r.age>=a&&r.age<=b).length})),r=>r.label.startsWith("15")?"var(--crit)":"var(--s1)",{left:92});
+  stackedCols($("#pa"),ow.map(o=>o[0]),["Pending debriefs"],ow.map(o=>({"Pending debriefs":o[1]})),{"Pending debriefs":"var(--s1)"},{legend:false,h:240});
+  let acc=0;const tot=rows.length||1;
+  lines($("#cu"),ow.map(o=>o[0]),[{name:"Cumulative share",color:"var(--s2)",values:ow.map(o=>(acc+=o[1])/tot)}],{pct:true,max:1,min:0,target:.8,targetLabel:"80%",h:240});
+  donut($("#dn"),TEAMS.map(t=>({label:t,v:rows.filter(r=>r.team===t).length})),["var(--s1)","var(--s2)","var(--s3)","var(--s4)","var(--s5)","var(--s6)"]);
+  const bs={};rows.forEach(r=>bs[r.site]=(bs[r.site]||0)+1);
+  hbars($("#ts"),Object.entries(bs).sort((a,b)=>b[1]-a[1]).slice(0,7).map(([k,v])=>({label:k.length>20?k.slice(0,19)+"…":k,v,tip:k+"<br>"+v+" pending"})),()=>"var(--s2)",{left:150});
+  $("#t").innerHTML=`<thead><tr><th>Job</th><th>Region</th><th>Site</th><th>Modality</th><th>Technician</th><th>Status</th><th class="n">Age (days)</th></tr></thead><tbody>${[...rows].sort((a,b)=>b.age-a.age).slice(0,40).map(r=>`<tr><td>${r.id}</td><td>${r.team}</td><td>${r.site}</td><td>${r.mod}</td><td>${r.owner}</td><td>${r.status}</td><td class="n">${r.age}</td></tr>`).join("")}</tbody>`;
+},
+vendors(host){
+  const v=fPM(VEND),a=fPM(ANC);
+  const conf=v.filter(r=>r.status.includes("confirmed")&&!r.status.includes("un")),unc=v.filter(r=>r.status.includes("unconfirmed"));
+  const H=[7,14,30,60,90];
+  host.innerHTML=`
+  <div class="grid kpis">
+    ${kpi("Contractor jobs (90 days)",fmt(v.length),"assigned and planned")}
+    ${kpi("Confirmed with customer",pct(v.length?conf.length/v.length:0),`${fmt(conf.length)} jobs confirmed`)}
+    ${kpi("Not confirmed with customer",fmt(unc.length),`<span class="pill ${unc.length/(v.length||1)>.2?"warn":"good"}">${unc.length/(v.length||1)>.2?"▲":"✔"} ${pct(v.length?unc.length/v.length:0)} of contractor work</span>`)}
+    ${kpi("Assigned, not confirmed with customer (4 wks)",fmt(a.length),`${fmt(a.filter(r=>r.days<=7).length)} in the next 7 days`)}
+  </div>
+  <div class="grid cols2">
+    <div class="card"><h3>Contractor jobs by time horizon</h3><p class="note">Cumulative jobs scheduled within the next N days</p><div id="hz"></div></div>
+    <div class="card"><h3>Planned work by month</h3><p class="note">Contractor vs in-house planned jobs</p><div id="pl"></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><h3>Jobs by contractor</h3><div id="dn"></div></div>
+    <div class="card"><h3>Assigned, not confirmed with customer, by horizon</h3><p class="note">Jobs assigned to an engineer where the customer has not yet confirmed the visit</p><div id="an"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>Assigned jobs awaiting customer confirmation, closest first</h3><div class="tablewrap"><table id="t"></table></div></div>`;
+  const hd=H.map(n=>({c:v.filter(r=>r.days<=n&&r.status.includes("un")===false).length,u:v.filter(r=>r.days<=n&&r.status.includes("unconfirmed")).length}));
+  stackedCols($("#hz"),H.map(n=>"Next "+n+"d"),["Confirmed","Not confirmed"],hd.map(d=>({Confirmed:d.c,"Not confirmed":d.u})),{Confirmed:"var(--s1)","Not confirmed":"var(--s2)"},{h:240});
+  lines($("#pl"),PLAN.map(p=>p[0]),[{name:"Contractor",color:"var(--s2)",values:PLAN.map(p=>p[1])},{name:"In-house",color:"var(--s1)",values:PLAN.map(p=>p[2])}],{h:240});
+  donut($("#dn"),VENDORS.map(n=>({label:n,v:v.filter(r=>r.owner===n).length})),["var(--s1)","var(--s2)","var(--s3)","var(--s4)"]);
+  const BK=["Next 7 days","Next 2 weeks","Next 3 weeks","Next 4 weeks"];
+  hbars($("#an"),BK.map(b=>({label:b,v:a.filter(r=>r.bucket===b).length})),r=>r.label==="Next 7 days"?"var(--crit)":"var(--s4)",{left:100});
+  $("#t").innerHTML=`<thead><tr><th>Job</th><th>Region</th><th>Site</th><th>Modality</th><th>Owner</th><th class="n">Days until scheduled</th></tr></thead><tbody>${[...a].sort((x,y)=>x.days-y.days).slice(0,40).map(r=>`<tr><td>${r.id}</td><td>${r.team}</td><td>${r.site}</td><td>${r.mod}</td><td>${r.owner}</td><td class="n">${r.days}</td></tr>`).join("")}</tbody>`;
+},
+health(host){
+  const m=metrics(),sh=m.share||1;
+  const od=m.overdue,u=od.filter(r=>r.status==="Overdue - unscheduled");
+  const items=[
+   {label:"Overdue jobs",v:od.length,a:250,b:450,max:500},
+   {label:"Pending debriefs",v:m.pdRows.length,a:300,b:400,max:500},
+   {label:"Assigned, not confirmed with customer",v:fPM(ANC).length,a:100,b:150,max:200},
+   {label:"Due, not scheduled",v:m.dueThis,a:120,b:180,max:250},
+   {label:"Overdue: 1st booking attempt",v:u.filter(r=>r.overdue>14).length,a:80,b:140,max:200},
+   {label:"Overdue: 2nd booking attempt",v:u.filter(r=>r.overdue>45).length,a:50,b:90,max:150},
+   {label:"Overdue: 3rd booking attempt",v:u.filter(r=>r.overdue>90).length,a:30,b:60,max:100},
+   {label:"Maintenance plans awaiting load",v:fPM(PLANLOAD).length,a:250,b:450,max:500}];
+  host.innerHTML=`<div class="card" style="margin-bottom:14px"><h3>Threshold health</h3><p class="note">Every operational queue against its green / amber / red thresholds. Thresholds scale with the selected filters.</p></div><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">${items.map((_,i)=>`<div class="card"><div id="h${i}"></div></div>`).join("")}</div>`;
+  items.forEach((it,i)=>{const a=it.a*sh,b=it.b*sh,mx=it.max*sh;
+    gauge($("#h"+i),{v:it.v,target:a,max:Math.max(mx,it.v*1.05),label:it.label,sub:it.v<=a?"✔ healthy":it.v<=b?"▲ watch":"▼ act",thresholds:[{to:a,color:"var(--good)"},{to:b,color:"var(--warn)"},{to:Math.max(mx,it.v*1.05),color:"var(--crit)"}],color:it.v<=a?"var(--good)":it.v<=b?"var(--warn)":"var(--crit)"})});
+}
+});
+
+Object.assign(VIEWS,{
+capacity(host){
+  const m=metrics(),sh=m.share||1;const c=state.cap=state.cap||{fe:27,av:.85,tr:1.5,seas:true,adj:[0,0,0,0,0,0]};
+  const MS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr","May"].map((x,i)=>x+" "+(i<12?"26":"27"));
+  const S0=[.93,.91,1.04,1,1.02,1.04,1.05,1,.98,1.04,1.03,.97],HFULL=Array.from({length:23},(_,t)=>Math.round((2250+t*20)*S0[t%12]*(1+.012*Math.sin(t*2.3)))),PLAN2=[2650,2560];
+  const nowI=10;
+  host.innerHTML=`
+  <div class="card"><h3>Capacity assumptions</h3><p class="note">Engineer capacity = workdays × (standard hours − travel) × engineers × availability. Move the sliders to test staffing scenarios.</p>
+   <div class="sliders">
+    <label>Field engineers <output id="o1"></output><input id="s1" type="range" min="10" max="60" step="1" value="${c.fe}"></label>
+    <label>Availability (leave, training, sickness) <output id="o2"></output><input id="s2" type="range" min="60" max="100" step="1" value="${Math.round(c.av*100)}"></label>
+    <label>Travel time (hours per day) <output id="o3"></output><input id="s3" type="range" min="0" max="4" step="0.25" value="${c.tr}"></label>
+   </div>
+   <label class="chk"><input id="sz" type="checkbox" ${c.seas?"checked":""}> Apply seasonality (month-of-year index fitted to 23 months of history)</label>
+   <h3 style="margin-top:16px">Management adjustments (hours per month)</h3><p class="note">Known events the statistical model cannot see: new installs, a contract win, a planned pull-forward, a freeze. Enter hours to add (or subtract) from forecast demand for each of the next six months. The forecast is the model, the adjustment is the judgement, and both stay visible.</p>
+   <div class="adj">${[1,2,3,4,5,6].map(i=>`<label>${MS[nowI+i]}<input class="ad" data-i="${i-1}" type="number" step="50" value="${c.adj[i-1]}"></label>`).join("")}</div></div><div id="cx" style="margin-top:14px"></div>`;
+  const draw=()=>{
+    $("#o1").textContent=c.fe;$("#o2").textContent=pct(c.av);$("#o3").textContent=c.tr+" h";
+    const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+    const FULL=HFULL.map(v=>v*sh),off=12;
+    const fit=ys=>{const n=ys.length,xm=(n-1)/2,ym=mean(ys);let sxy=0,sxx=0;ys.forEach((v,i)=>{sxy+=(i-xm)*(v-ym);sxx+=(i-xm)**2});const b=sxy/sxx;return{b,a:ym-b*xm}};
+    const f0=fit(FULL),ratio=Array.from({length:12},()=>[]);FULL.forEach((v,t)=>ratio[t%12].push(v/(f0.a+f0.b*t)));
+    let idx=ratio.map(r=>mean(r));const im=mean(idx);idx=idx.map(v=>v/im);
+    const SI=c.seas?idx:idx.map(()=>1);
+    const ds=FULL.map((v,t)=>v/SI[t%12]),fd=fit(ds),d3=mean(ds.slice(-3)),d6=mean(ds.slice(-6));
+    const roll=(i,k)=>{const w=[];for(let j=Math.max(0,off+i-k+1);j<=Math.min(off+i,off+nowI);j++)w.push(FULL[j]);return mean(w)};
+    const demand=[],r3=[],r6=[];
+    MS.forEach((_,i)=>{r3.push(roll(i,3));r6.push(roll(i,6));const t=off+i;
+      if(i<=nowI)demand.push(FULL[t]);else if(i<=nowI+2)demand.push(PLAN2[i-nowI-1]*sh);
+      else demand.push(mean([d3,d6,fd.a+fd.b*t])*SI[t%12])});
+    const base=demand.slice();c.adj.forEach((a,k)=>{const i=nowI+1+k;if(i<demand.length)demand[i]=Math.max(0,demand[i]+a)});
+    const wd=MS.map((_,i)=>bizDaysIn(i<12?2026:2027,i%12));
+    const cap=wd.map(d=>d*Math.max(0,7.5-c.tr)*c.fe*c.av*sh);
+    const util=demand.map((d,i)=>d/cap[i]);
+    const over=util.slice(nowI+1).filter(u=>u>1).length;
+    const odH=m.overdue.reduce((a,r)=>a+DUR[r.mod],0),openH=demand[nowI],tgt=openH*.05;
+    const odCol=odH<=tgt?"var(--good)":odH<=tgt*1.2?"var(--warn)":"var(--crit)";
+    const avgDur=2.4;
+    $("#cx").innerHTML=`
+    <div class="grid kpis">
+      ${kpi("Capacity this month",fmt(cap[nowI])+" h",`${wd[nowI]} workdays · ${c.fe} engineers`)}
+      ${kpi("Demand this month",fmt(demand[nowI])+" h",`utilisation ${pct(util[nowI])}`)}
+      ${kpi("Jobs capacity can clear",fmt(cap[nowI]/avgDur),`at ${avgDur} h average job`)}
+      ${kpi("Months over capacity",fmt(over),`<span class="pill ${over?"crit":"good"}">${over?"▼ of the next 6 months":"✔ none in the next 6 months"}</span>`)}
+    </div>
+    <div class="card"><h3>Capacity vs demand (hours per month)</h3><p class="note">Faded bars are forecast. Next two months use planned demand; later months blend the 3-month and 6-month rolling averages with a linear trend, all deseasonalised, then multiply by the month-of-year seasonal index.</p><div id="cb"></div></div>
+    <div class="grid cols2" style="margin-top:14px">
+      <div class="card"><h3>Utilisation</h3><p class="note">Demand ÷ capacity · dashed = 100%</p><div id="ut"></div></div>
+      <div class="card"><h3>Capacity gap (hours)</h3><p class="note">Positive = spare capacity, negative = shortfall</p><div id="gp"></div></div>
+    </div>
+    <div class="grid cols2" style="margin-top:14px">
+      <div class="card"><h3>Seasonal index</h3><p class="note">Typical demand for each calendar month, as % above or below an average month. ${c.seas?"Applied to the forecast.":"Switched off: forecast is flat across months."}</p><div id="si"></div></div>
+      <div class="card"><h3>How the forecast is built</h3><ol class="note" style="line-height:1.7;padding-left:18px;margin:0"><li>Months 0 to 2: actual due hours plus planned visits</li><li>Remove the seasonal index from history (divide)</li><li>Blend 3-month average, 6-month average and linear trend of the deseasonalised series</li><li>Put the season back (multiply by that month's index)</li><li>Add any management adjustments on top, kept visible</li></ol></div>
+    </div>
+    <div class="grid cols2" style="margin-top:14px">
+      <div class="card"><div id="g1"></div></div>
+      <div class="card"><div id="g2"></div></div>
+    </div>`;
+    combo($("#cb"),MS,[{name:"Engineer capacity",color:"var(--s1)",values:cap},{name:"Demand (actual / forecast)",color:"var(--s2)",values:demand,op:i=>i>nowI?.5:1}],[{name:"Model forecast (before adjustments)",color:"var(--ink2)",values:base.map((v,i)=>i>=nowI&&c.adj.some(x=>x)?v:null),dash:true},{name:"3-month rolling avg",color:"var(--s3)",values:r3.map((v,i)=>i<=nowI?v:null),dash:true},{name:"6-month rolling avg",color:"var(--s4)",values:r6.map((v,i)=>i<=nowI?v:null),dash:true}],{h:290});
+    lines($("#ut"),MS,[{name:"Utilisation",color:"var(--s2)",values:util}],{pct:true,max:Math.max(1.4,Math.ceil(Math.max(...util)*10)/10+.1),min:.4,target:1,targetLabel:"100%",h:240});
+    const gap=cap.map((x,i)=>x-demand[i]);
+    const ML=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    stackedCols($("#si"),ML,["Above average","Below average"],idx.map(v=>({"Above average":Math.max(0,(c.seas?v-1:0)*100),"Below average":Math.max(0,(c.seas?1-v:0)*100)})),{"Above average":"var(--s2)","Below average":"var(--s1)"},{h:220});
+    stackedCols($("#gp"),MS.map(x=>x.slice(0,3)),["Spare","Shortfall"],gap.map(v=>({Spare:Math.max(0,v),Shortfall:Math.max(0,-v)})),{Spare:"var(--s3)",Shortfall:"var(--s2)"},{h:240});
+    gauge($("#g1"),{v:util[nowI+1],target:1,max:1.2,fmt:v=>Math.round(v*100)+"%",label:"Next month utilisation",sub:"target 100%",thresholds:[{to:1,color:"var(--good)"},{to:1.2,color:"var(--crit)"}],color:util[nowI+1]<=1?"var(--good)":"var(--crit)"});
+    gauge($("#g2"),{v:odH,target:tgt,max:Math.max(odH,tgt)*1.1,label:"Overdue hours vs 5% of demand",sub:`target ${fmt(tgt)} h`,fmt:v=>fmt(v)+" h",color:odCol,thresholds:[{to:tgt,color:"var(--good)"},{to:tgt*1.2,color:"var(--warn)"},{to:Math.max(odH,tgt)*1.1,color:"var(--crit)"}]});
+  };
+  document.querySelectorAll(".ad").forEach(el=>el.oninput=e=>{c.adj[+el.dataset.i]=+el.value||0;draw()});
+  $("#sz").onchange=e=>{c.seas=e.target.checked;draw()};
+  $("#s1").oninput=e=>{c.fe=+e.target.value;draw()};$("#s2").oninput=e=>{c.av=e.target.value/100;draw()};$("#s3").oninput=e=>{c.tr=+e.target.value;draw()};
+  draw();
+},
+planned(host){
+  const r=fPM(PJ);const RB=["Critical - no contact, due ≤14d","High - no customer contact","Medium - not locked","Low - contacted & locked"];
+  const RC={RB0:"var(--crit)"};
+  host.innerHTML=`
+  <div class="grid kpis">
+    ${kpi("Planned jobs (120 days)",fmt(r.length),"output of the planning run")}
+    ${kpi("Due within 30 days",fmt(r.filter(x=>x.days<=30).length),`${fmt(r.filter(x=>x.days<=90).length)} within 90 days`)}
+    ${kpi("No customer contact",fmt(r.filter(x=>!x.cust).length),`<span class="pill ${r.filter(x=>!x.cust).length/(r.length||1)>.2?"warn":"good"}">${pct(r.length?r.filter(x=>!x.cust).length/r.length:0)} of planned jobs</span>`)}
+    ${kpi("Planned workload",fmt(r.reduce((a,x)=>a+x.hrs,0))+" h","duration plus travel")}
+  </div>
+  <div class="grid cols2">
+    <div class="card"><h3>Upcoming jobs by horizon</h3><p class="note">30 / 60 / 90 / 120 day windows, by modality</p><div id="c1"></div></div>
+    <div class="card"><h3>Risk matrix</h3><p class="note">Risk bucket × modality · darker = more jobs</p><div id="c2"></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><h3>Planned jobs by region</h3><p class="note">See the Map tab → "Planned jobs" for the geographic view</p><div id="c3"></div></div>
+    <div class="card"><h3>Risk profile</h3><div id="c4"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>Highest-risk planned jobs</h3><div class="tablewrap"><table id="t"></table></div></div>`;
+  const H=["Due ≤ 30 days","Due 31-60 days","Due 61-90 days","Due 91+ days"];
+  stackedCols($("#c1"),["≤30d","31-60d","61-90d","91+d"],MODS,H.map(h=>{const o={};MODS.forEach(m=>o[m]=r.filter(x=>x.status===h&&x.mod===m).length);return o}),MODCOL(),{h:250});
+  heat($("#c2"),RB.map(x=>x.split(" - ")[0]),MODS,RB.map(b=>MODS.map(m=>r.filter(x=>x.risk===b&&x.mod===m).length)),{lw:80,color:"var(--s2)",unit:" jobs",ch:38});
+  hbars($("#c3"),TEAMS.map(t=>({label:t,v:r.filter(x=>x.team===t).length})),x=>TEAMCOL()[x.label],{left:62});
+  donut($("#c4"),RB.map(b=>({label:b.split(" - ")[0],v:r.filter(x=>x.risk===b).length})),["var(--crit)","var(--s2)","var(--s4)","var(--s3)"]);
+  const order=x=>RB.indexOf(x.risk)*1000+x.days;
+  $("#t").innerHTML=`<thead><tr><th>Plan</th><th>Region</th><th>Site</th><th>Modality</th><th>Risk</th><th class="n">Days out</th></tr></thead><tbody>${[...r].sort((a,b)=>order(a)-order(b)).slice(0,40).map(x=>`<tr><td>${x.id}</td><td>${x.team}</td><td>${x.site}</td><td>${x.mod}</td><td>${x.risk}</td><td class="n">${x.days}</td></tr>`).join("")}</tbody>`;
+},
+protocols(host){
+  const all=fPM(PROT),lat=all.filter(x=>x.run==="latest"),prev=all.filter(x=>x.run==="previous");
+  const er=a=>a.filter(x=>x.sev==="ERROR").length,wa=a=>a.filter(x=>x.sev==="WARNING").length;
+  const act=lat.filter(x=>x.action),sysAct=new Set(act.map(x=>x.sys)).size,sysAll=new Set(lat.map(x=>x.sys)).size;
+  const d=er(lat)-er(prev)*(lat.length&&prev.length?lat.length/prev.length*0+1:1);
+  host.innerHTML=`
+  <div class="grid kpis">
+    ${kpi("Errors (latest run)",fmt(er(lat)),`<span class="pill ${er(lat)>er(prev)?"crit":"good"}">${er(lat)>er(prev)?"▲":"▼"} ${Math.abs(er(lat)-er(prev))} vs previous run</span>`)}
+    ${kpi("Warnings (latest run)",fmt(wa(lat)),`${fmt(wa(prev))} in previous run`)}
+    ${kpi("Systems needing action",fmt(sysAct),`${sysAll?pct(sysAct/sysAll):"0%"} of ${fmt(sysAll)} impacted systems`)}
+    ${kpi("Action defects per 100 systems",(sysAll?100*sysAct/sysAll:0).toFixed(1),"lower is better")}
+  </div>
+  <div class="grid cols2">
+    <div class="card"><h3>Errors and warnings by category</h3><p class="note">Latest planning run</p><div id="c1"></div></div>
+    <div class="card"><h3>How long systems have been missing a job</h3><p class="note">Days since the protocol first appeared</p><div id="c2"></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><h3>Protocol volume by service area</h3><div id="c3"></div></div>
+    <div class="card"><h3>Protocol codes × category</h3><p class="note">Top codes by volume · darker = more occurrences</p><div id="c4"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>Actionable protocols</h3><div class="tablewrap"><table id="t"></table></div></div>`;
+  const cats=PCAT.map(c=>c[0]);
+  stackedCols($("#c1"),cats.map(c=>c.split(" ")[0]),["ERROR","WARNING"],cats.map(c=>({ERROR:lat.filter(x=>x.cat===c&&x.sev==="ERROR").length,WARNING:lat.filter(x=>x.cat===c&&x.sev==="WARNING").length})),{ERROR:"var(--s2)",WARNING:"var(--s4)"},{h:250});
+  hbars($("#c2"),["0-30","31-60","61-90","90+"].map(b=>({label:b+" days",v:lat.filter(x=>PROTB(x.age)===b).length})),x=>x.label.startsWith("90")?"var(--crit)":"var(--s1)",{left:92});
+  treemap($("#c3"),TEAMS.map(t=>({label:t,v:lat.filter(x=>x.team===t).length,color:TEAMCOL()[t]})),[],{h:240});
+  const codes={};lat.forEach(x=>codes[x.code]=(codes[x.code]||0)+1);const top=Object.entries(codes).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
+  heat($("#c4"),top,cats.map(c=>c.split(" ")[0]),top.map(cd=>cats.map(c=>lat.filter(x=>x.code===cd&&x.cat===c).length)),{lw:60,color:"var(--s1)",unit:" occurrences",ch:30});
+  $("#t").innerHTML=`<thead><tr><th>Code</th><th>Region</th><th>Category</th><th>Detail</th><th>Severity</th><th>System</th><th class="n">Days</th></tr></thead><tbody>${[...act].sort((a,b)=>b.age-a.age).slice(0,40).map(x=>`<tr><td>${x.code}</td><td>${x.team}</td><td>${x.cat}</td><td>${x.sub}</td><td>${x.sev}</td><td>${x.sys}</td><td class="n">${x.age}</td></tr>`).join("")}</tbody>`;
+},
+letters(host){
+  const J=fPM(JOUR);const conf=J.filter(j=>j.conf!=null);
+  const offers=J.length,fus=J.reduce((a,j)=>a+j.fu.length,0);
+  const open=J.filter(j=>j.outcome.startsWith("Open")),outG=open.filter(j=>j.outcome==="Open - out of guideline");
+  const avgDays=conf.length?conf.reduce((a,j)=>a+j.conf,0)/conf.length:0;
+  host.innerHTML=`
+  <div class="grid kpis">
+    ${kpi("Customer journeys",fmt(offers),"offer letters sent, last 120 days")}
+    ${kpi("Confirmation rate",pct(offers?conf.length/offers:0),`${fmt(conf.length)} bookings confirmed`)}
+    ${kpi("Avg days to confirm",avgDays.toFixed(1),"from first offer")}
+    ${kpi("Open offers out of guideline",fmt(outG.length),`<span class="pill ${outG.length/(open.length||1)>.25?"crit":"warn"}">${pct(open.length?outG.length/open.length:0)} of ${fmt(open.length)} open offers</span>`)}
+  </div>
+  <div class="grid cols2">
+    <div class="card"><h3>Letter funnel</h3><p class="note">Offers → follow-ups → booking confirmations</p><div id="fn"></div></div>
+    <div class="card"><h3>Journey outcomes</h3><p class="note">Where each offer stands today · area = number of journeys</p><div id="tm"></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><h3>Letters sent by type, by month</h3><div id="ln"></div></div>
+    <div class="card"><h3>Customer reply time</h3><p class="note">How quickly customers respond to the offer</p><div id="rp"></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><h3>Back-and-forth journeys</h3><p class="note">Journeys needing 2+ follow-ups or a re-offer, by offer month</p><div id="bf"></div></div>
+    <div class="card"><h3>Follow-up adherence by planner</h3><p class="note">Follow-ups sent within the guideline vs late</p><div id="ad"></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:14px">
+    <div class="card"><div id="gg"></div><p class="note" style="text-align:center">${fmt(open.length-outG.length)} in guideline · ${fmt(outG.length)} out of guideline</p></div>
+    <div class="card"><h3>Offer follow-up action list</h3><p class="note">Open offers that need a planner to act</p><div class="tablewrap" style="max-height:230px"><table id="t"></table></div></div>
+  </div>`;
+  funnel($("#fn"),[{label:"Offers sent",v:offers},{label:"Follow-ups",v:fus,tip:"some journeys need two follow-ups"},{label:"Confirmations",v:conf.length}],["var(--s1)","var(--s2)","var(--s3)"]);
+  const OC=["Confirmed first time","Confirmed after follow-up","Open - in guideline","Open - out of guideline","Cancellation due"],OCL={"Confirmed first time":"var(--s3)","Confirmed after follow-up":"var(--s1)","Open - in guideline":"var(--s4)","Open - out of guideline":"var(--s2)","Cancellation due":"var(--crit)"};
+  treemap($("#tm"),OC.map(o=>({label:o,v:J.filter(j=>j.outcome===o).length,color:OCL[o]})),[],{h:250});
+  const MO=[],mm=[6,7,8,9,10];const ML=mm.map(i=>MONTHSHORT[i]);
+  const TY=["Offer","Follow-up","Booking confirmation"],TC={Offer:"var(--s1)","Follow-up":"var(--s2)","Booking confirmation":"var(--s3)"};
+  const msgs=OUT.filter(x=>(state.team==="All"||x.team===state.team)&&(state.mod==="All"||x.mod===state.mod));
+  lines($("#ln"),ML,TY.map(t=>({name:t,color:TC[t],values:mm.map(i=>msgs.filter(x=>x.type===t&&x.date.getMonth()===i).length)})),{h:240});
+  donut($("#rp"),["Same day","1-2 days","3-5 days","6+ days","No reply yet"].map(b=>({label:b,v:J.filter(j=>j.reply===b).length})),["var(--s3)","var(--s1)","var(--s4)","var(--s2)","var(--s5)"]);
+  const bf=mm.map(i=>{const a=J.filter(j=>j.offer.getMonth()===i);return {n:a.filter(j=>j.rebook).length,p:a.length?a.filter(j=>j.rebook).length/a.length:0}});
+  combo($("#bf"),ML,[{name:"Back-and-forth journeys",color:"var(--s1)",values:bf.map(x=>x.n)}],[],{h:210});
+  const pl=SENDERS.map(p=>{const f=J.filter(j=>j.planner===p).flatMap(j=>j.fu);return {"On time":f.filter(x=>x.onTime).length,Late:f.filter(x=>!x.onTime).length}});
+  stackedCols($("#ad"),SENDERS,["On time","Late"],pl,{"On time":"var(--s3)",Late:"var(--s2)"},{h:230});
+  const pOut=open.length?outG.length/open.length:0;
+  gauge($("#gg"),{v:pOut,target:.25,max:.6,fmt:v=>Math.round(v*100)+"%",label:"Open offers out of guideline",sub:"target ≤ 25%",thresholds:[{to:.25,color:"var(--good)"},{to:.4,color:"var(--warn)"},{to:.6,color:"var(--crit)"}],color:pOut<=.25?"var(--good)":pOut<=.4?"var(--warn)":"var(--crit)"});
+  const todo=J.filter(j=>j.action!=="None").sort((a,b)=>b.since-a.since).slice(0,25);
+  $("#t").innerHTML=`<thead><tr><th>Planner</th><th>Action</th><th>Modality</th><th>System</th><th class="n">Days quiet</th></tr></thead><tbody>${todo.map(j=>`<tr><td>${j.planner}</td><td>${j.action}</td><td>${j.mod}</td><td>${j.sys}</td><td class="n">${j.since}</td></tr>`).join("")}</tbody>`;
+}
+});
+
+/* ============================================================
+   5. SHELL
+   ============================================================ */
+function init(){
+  $("#asof").textContent="As of "+ASOF.toLocaleDateString("en-AU",{day:"numeric",month:"short",year:"numeric"});
+  $("#fTeam").innerHTML=["All",...TEAMS].map(t=>`<option>${t}</option>`).join("");
+  $("#fMod").innerHTML=["All",...MODS].map(t=>`<option>${t}</option>`).join("");
+  let pg="";$("#tabs").innerHTML=TABS.map(([k,l,g])=>{const h=g!==pg?`<span class="grp">${g}</span>`:"";pg=g;return h+`<button role="tab" data-t="${k}" aria-selected="${k===state.tab}">${l}</button>`}).join("");
+  $("#tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;state.tab=b.dataset.t;location.hash=state.tab;render()};
+  $("#fTeam").onchange=e=>{state.team=e.target.value;render()};
+  $("#fMod").onchange=e=>{state.mod=e.target.value;render()};
+  $("#reset").onclick=()=>{state.team=state.mod="All";state.completion=CFG.completion;state.pull=CFG.pull;$("#fTeam").value=$("#fMod").value="All";render()};
+  $("#theme").onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;r.dataset.theme=dark?"light":"dark";render()};
+  $("#method").innerHTML=`<b>Method.</b> ${fmt(PM.length)} maintenance job records, ${fmt(PD.length+VEND.length+ANC.length+PJ.length+PROT.length+JOUR.length)} debrief, contractor, planning and customer-journey records, ${fmt(REQ.length)} requests and ${fmt(OUT.length)} outreach messages are generated in the browser from a fixed random seed, so the numbers are identical on every visit. Forecast logic mirrors a production DAX model: <code>completed to date + scheduled × completion + min(unscheduled, remaining days × daily rate × pull-through)</code>.`;
+  const h=location.hash.slice(1);if(TABS.some(t=>t[0]===h))state.tab=h;
+  addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(TABS.some(t=>t[0]===h)){state.tab=h;render()}});
+  let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(render,120)});
+  render();
+}
+function render(){
+  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===state.tab));
+  hideTip();VIEWS[state.tab]($("#view"));
+}
+init();
+</script>
+</body>
+</html>
