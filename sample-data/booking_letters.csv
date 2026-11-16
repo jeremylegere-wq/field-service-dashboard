@@ -1,0 +1,601 @@
+JourneyID,Planner,Region,Modality,OfferDate,FollowUp1Date,FollowUp2Date,ConfirmDate,Outcome
+BJ-7000,Callum,Island,X-Ray,2026-08-31,2026-09-04,2026-09-09,2026-09-28,Confirmed after follow-up
+BJ-7001,Alex,Island,X-Ray,2026-09-21,,,2026-09-29,Confirmed first time
+BJ-7002,Bianca,Central,MR,2026-07-22,2026-07-27,2026-07-31,2026-08-01,Confirmed after follow-up
+BJ-7003,Alex,East,Ultrasound,2026-10-23,2026-10-30,2026-11-08,2026-11-15,Confirmed after follow-up
+BJ-7004,Alex,North,X-Ray,2026-08-17,2026-08-22,,2026-08-26,Confirmed after follow-up
+BJ-7005,Alex,East,CT,2026-10-15,,,2026-10-21,Confirmed first time
+BJ-7006,Bianca,West,Ultrasound,2026-11-05,,,2026-11-11,Confirmed first time
+BJ-7007,Alex,West,Ultrasound,2026-11-09,,,2026-11-14,Confirmed first time
+BJ-7008,Bianca,Island,Ultrasound,2026-09-11,,,2026-09-17,Confirmed first time
+BJ-7009,Bianca,North,Ultrasound,2026-07-27,2026-08-02,2026-08-11,2026-08-14,Confirmed after follow-up
+BJ-7010,Alex,East,X-Ray,2026-09-08,2026-09-12,,2026-09-15,Confirmed after follow-up
+BJ-7011,Alex,East,CT,2026-09-23,,,2026-09-28,Confirmed first time
+BJ-7012,Callum,North,Ultrasound,2026-09-17,2026-09-23,2026-09-29,,Cancellation due
+BJ-7013,Bianca,South,MR,2026-09-07,2026-09-16,2026-09-20,2026-09-22,Confirmed after follow-up
+BJ-7014,Callum,South,Ultrasound,2026-10-19,2026-10-26,,2026-10-29,Confirmed after follow-up
+BJ-7015,Callum,North,Ultrasound,2026-07-30,2026-08-03,,2026-08-09,Confirmed after follow-up
+BJ-7016,Alex,South,MR,2026-10-30,2026-11-04,2026-11-10,2026-11-15,Confirmed after follow-up
+BJ-7017,Alex,West,MR,2026-08-14,2026-08-21,2026-08-29,2026-08-30,Confirmed after follow-up
+BJ-7018,Bianca,South,X-Ray,2026-07-23,2026-07-30,,2026-08-03,Confirmed after follow-up
+BJ-7019,Dani,East,Ultrasound,2026-07-22,2026-07-27,2026-08-03,2026-08-14,Confirmed after follow-up
+BJ-7020,Callum,South,CT,2026-08-14,,,2026-08-23,Confirmed first time
+BJ-7021,Alex,East,CT,2026-07-24,,,2026-07-27,Confirmed first time
+BJ-7022,Dani,East,MR,2026-08-27,2026-09-01,2026-09-08,2026-09-20,Confirmed after follow-up
+BJ-7023,Bianca,East,MR,2026-10-13,,,2026-10-18,Confirmed first time
+BJ-7024,Callum,South,CT,2026-09-17,,,2026-09-20,Confirmed first time
+BJ-7025,Bianca,West,CT,2026-10-29,2026-11-03,2026-11-09,,Open
+BJ-7026,Dani,Central,MR,2026-10-23,,,2026-10-29,Confirmed first time
+BJ-7027,Callum,North,CT,2026-08-21,2026-08-29,,2026-08-31,Confirmed after follow-up
+BJ-7028,Alex,Island,X-Ray,2026-08-05,2026-08-14,2026-08-22,2026-08-26,Confirmed after follow-up
+BJ-7029,Bianca,East,CT,2026-09-09,2026-09-18,2026-09-27,,Cancellation due
+BJ-7030,Callum,Central,MR,2026-11-13,,,,Open
+BJ-7031,Bianca,East,MR,2026-09-25,2026-10-04,,2026-10-05,Confirmed after follow-up
+BJ-7032,Callum,East,Ultrasound,2026-08-21,2026-08-30,2026-09-05,,Cancellation due
+BJ-7033,Dani,North,MR,2026-08-13,2026-08-17,2026-08-25,2026-09-06,Confirmed after follow-up
+BJ-7034,Callum,South,CT,2026-09-23,2026-09-28,2026-10-05,2026-10-09,Confirmed after follow-up
+BJ-7035,Alex,North,Ultrasound,2026-07-23,2026-07-30,,2026-08-03,Confirmed after follow-up
+BJ-7036,Callum,West,MR,2026-10-09,2026-10-17,,2026-10-23,Confirmed after follow-up
+BJ-7037,Dani,North,CT,2026-08-14,2026-08-19,2026-08-24,2026-08-29,Confirmed after follow-up
+BJ-7038,Alex,North,CT,2026-07-27,2026-08-03,2026-08-10,,Cancellation due
+BJ-7039,Dani,East,CT,2026-09-01,2026-09-05,2026-09-13,2026-09-14,Confirmed after follow-up
+BJ-7040,Bianca,Island,Ultrasound,2026-09-11,2026-09-20,,2026-09-24,Confirmed after follow-up
+BJ-7041,Bianca,North,X-Ray,2026-08-28,2026-09-03,2026-09-09,,Cancellation due
+BJ-7042,Alex,Island,CT,2026-10-16,2026-10-25,2026-11-03,2026-11-11,Confirmed after follow-up
+BJ-7043,Bianca,South,X-Ray,2026-08-18,2026-08-22,2026-08-27,2026-09-13,Confirmed after follow-up
+BJ-7044,Bianca,South,CT,2026-09-08,2026-09-13,2026-09-17,2026-09-29,Confirmed after follow-up
+BJ-7045,Bianca,East,CT,2026-08-14,2026-08-21,2026-08-29,2026-08-30,Confirmed after follow-up
+BJ-7046,Callum,West,X-Ray,2026-10-21,2026-10-29,2026-11-03,2026-11-06,Confirmed after follow-up
+BJ-7047,Alex,Island,X-Ray,2026-08-07,2026-08-12,,2026-08-13,Confirmed after follow-up
+BJ-7048,Bianca,East,CT,2026-10-01,,,2026-10-02,Confirmed first time
+BJ-7049,Bianca,East,X-Ray,2026-10-20,2026-10-25,,2026-10-27,Confirmed after follow-up
+BJ-7050,Callum,North,X-Ray,2026-10-09,2026-10-17,2026-10-22,2026-10-28,Confirmed after follow-up
+BJ-7051,Alex,East,CT,2026-09-07,2026-09-14,2026-09-19,2026-09-21,Confirmed after follow-up
+BJ-7052,Bianca,West,CT,2026-11-13,,,,Open
+BJ-7053,Bianca,East,X-Ray,2026-10-07,2026-10-16,2026-10-25,2026-10-26,Confirmed after follow-up
+BJ-7054,Alex,East,CT,2026-09-03,2026-09-12,2026-09-16,2026-09-28,Confirmed after follow-up
+BJ-7055,Dani,South,MR,2026-10-20,,,2026-10-26,Confirmed first time
+BJ-7056,Alex,West,X-Ray,2026-10-20,2026-10-27,2026-10-31,2026-11-06,Confirmed after follow-up
+BJ-7057,Callum,Island,MR,2026-10-09,,,2026-10-13,Confirmed first time
+BJ-7058,Dani,South,X-Ray,2026-08-20,,,2026-08-21,Confirmed first time
+BJ-7059,Alex,South,X-Ray,2026-11-12,2026-11-16,,,Open
+BJ-7060,Callum,North,X-Ray,2026-09-11,2026-09-19,2026-09-28,2026-10-09,Confirmed after follow-up
+BJ-7061,Callum,South,X-Ray,2026-10-23,2026-10-28,2026-11-01,,Cancellation due
+BJ-7062,Bianca,North,CT,2026-09-01,2026-09-06,,2026-09-08,Confirmed after follow-up
+BJ-7063,Alex,Central,X-Ray,2026-08-14,,,2026-08-20,Confirmed first time
+BJ-7064,Alex,South,CT,2026-07-28,2026-08-01,,2026-08-03,Confirmed after follow-up
+BJ-7065,Bianca,East,MR,2026-08-14,2026-08-23,2026-08-28,2026-08-31,Confirmed after follow-up
+BJ-7066,Alex,Island,MR,2026-08-13,2026-08-20,,2026-08-26,Confirmed after follow-up
+BJ-7067,Dani,East,Ultrasound,2026-09-18,2026-09-26,2026-10-03,2026-10-12,Confirmed after follow-up
+BJ-7068,Alex,East,X-Ray,2026-11-04,2026-11-11,,,Open
+BJ-7069,Alex,Central,MR,2026-11-13,,,2026-11-15,Confirmed first time
+BJ-7070,Callum,North,CT,2026-07-20,2026-07-25,2026-08-03,,Cancellation due
+BJ-7071,Bianca,South,X-Ray,2026-10-22,2026-10-28,2026-11-01,2026-11-08,Confirmed after follow-up
+BJ-7072,Bianca,North,CT,2026-10-07,2026-10-15,,2026-10-16,Confirmed after follow-up
+BJ-7073,Dani,East,CT,2026-09-18,2026-09-25,2026-10-03,2026-10-14,Confirmed after follow-up
+BJ-7074,Alex,South,X-Ray,2026-11-16,,,,Open
+BJ-7075,Bianca,Island,X-Ray,2026-08-24,,,2026-08-26,Confirmed first time
+BJ-7076,Bianca,Island,CT,2026-07-24,2026-07-29,2026-08-05,2026-08-09,Confirmed after follow-up
+BJ-7077,Bianca,South,X-Ray,2026-07-20,2026-07-25,2026-08-02,2026-08-07,Confirmed after follow-up
+BJ-7078,Dani,East,X-Ray,2026-10-30,,,2026-11-03,Confirmed first time
+BJ-7079,Alex,Central,CT,2026-11-13,,,,Open
+BJ-7080,Callum,North,CT,2026-11-11,,,,Open
+BJ-7081,Alex,East,MR,2026-09-17,2026-09-23,2026-09-30,2026-10-14,Confirmed after follow-up
+BJ-7082,Callum,Central,MR,2026-10-13,2026-10-20,2026-10-28,2026-11-08,Confirmed after follow-up
+BJ-7083,Dani,Island,X-Ray,2026-08-28,,,2026-09-03,Confirmed first time
+BJ-7084,Callum,West,MR,2026-11-13,,,,Open
+BJ-7085,Bianca,North,Ultrasound,2026-08-24,2026-08-28,2026-09-01,2026-09-12,Confirmed after follow-up
+BJ-7086,Alex,Island,Ultrasound,2026-07-23,2026-07-30,,2026-08-06,Confirmed after follow-up
+BJ-7087,Dani,South,MR,2026-09-03,,,2026-09-08,Confirmed first time
+BJ-7088,Alex,North,X-Ray,2026-11-12,2026-11-16,,,Open
+BJ-7089,Dani,South,MR,2026-09-16,2026-09-20,2026-09-25,2026-10-01,Confirmed after follow-up
+BJ-7090,Alex,North,X-Ray,2026-10-02,2026-10-08,2026-10-15,,Cancellation due
+BJ-7091,Callum,Island,MR,2026-10-06,2026-10-11,2026-10-15,2026-10-30,Confirmed after follow-up
+BJ-7092,Callum,Island,X-Ray,2026-10-23,2026-10-31,2026-11-08,2026-11-09,Confirmed after follow-up
+BJ-7093,Bianca,West,MR,2026-10-23,2026-10-28,2026-11-05,,Cancellation due
+BJ-7094,Callum,Island,CT,2026-10-02,2026-10-11,2026-10-15,2026-10-24,Confirmed after follow-up
+BJ-7095,Dani,Central,CT,2026-08-28,2026-09-04,2026-09-13,2026-09-14,Confirmed after follow-up
+BJ-7096,Bianca,East,X-Ray,2026-08-10,2026-08-16,2026-08-22,2026-08-28,Confirmed after follow-up
+BJ-7097,Bianca,North,CT,2026-10-07,2026-10-16,,2026-10-20,Confirmed after follow-up
+BJ-7098,Alex,East,CT,2026-08-14,2026-08-21,2026-08-28,2026-09-05,Confirmed after follow-up
+BJ-7099,Alex,West,CT,2026-07-29,2026-08-04,,2026-08-06,Confirmed after follow-up
+BJ-7100,Alex,Island,X-Ray,2026-11-03,2026-11-08,,2026-11-10,Confirmed after follow-up
+BJ-7101,Callum,West,CT,2026-10-30,2026-11-08,,2026-11-12,Confirmed after follow-up
+BJ-7102,Bianca,East,X-Ray,2026-07-28,2026-08-02,,2026-08-10,Confirmed after follow-up
+BJ-7103,Alex,North,CT,2026-10-01,2026-10-07,,2026-10-11,Confirmed after follow-up
+BJ-7104,Alex,South,X-Ray,2026-07-23,2026-07-28,,2026-08-02,Confirmed after follow-up
+BJ-7105,Alex,Island,Ultrasound,2026-11-03,2026-11-11,,2026-11-12,Confirmed after follow-up
+BJ-7106,Bianca,South,X-Ray,2026-10-09,2026-10-13,2026-10-22,2026-11-05,Confirmed after follow-up
+BJ-7107,Dani,North,CT,2026-08-10,,,2026-08-18,Confirmed first time
+BJ-7108,Alex,East,MR,2026-11-02,2026-11-08,2026-11-15,2026-11-16,Confirmed after follow-up
+BJ-7109,Callum,North,Ultrasound,2026-10-09,2026-10-17,2026-10-24,2026-10-29,Confirmed after follow-up
+BJ-7110,Bianca,East,X-Ray,2026-08-25,2026-09-02,2026-09-09,2026-09-14,Confirmed after follow-up
+BJ-7111,Alex,West,X-Ray,2026-10-16,,,2026-10-18,Confirmed first time
+BJ-7112,Bianca,South,CT,2026-07-17,2026-07-25,2026-07-30,2026-08-12,Confirmed after follow-up
+BJ-7113,Dani,South,X-Ray,2026-07-24,2026-07-31,,2026-08-04,Confirmed after follow-up
+BJ-7114,Alex,East,MR,2026-11-06,2026-11-10,2026-11-15,,Open
+BJ-7115,Dani,South,CT,2026-08-13,2026-08-22,2026-08-29,2026-09-03,Confirmed after follow-up
+BJ-7116,Dani,South,X-Ray,2026-08-27,,,2026-09-05,Confirmed first time
+BJ-7117,Callum,South,MR,2026-09-02,2026-09-06,2026-09-13,2026-09-26,Confirmed after follow-up
+BJ-7118,Bianca,North,CT,2026-10-08,2026-10-13,2026-10-17,2026-11-03,Confirmed after follow-up
+BJ-7119,Callum,Island,X-Ray,2026-11-12,,,2026-11-13,Confirmed first time
+BJ-7120,Bianca,East,X-Ray,2026-10-02,,,2026-10-06,Confirmed first time
+BJ-7121,Alex,Island,MR,2026-10-23,,,2026-10-25,Confirmed first time
+BJ-7122,Alex,Island,X-Ray,2026-09-16,2026-09-24,2026-10-02,2026-10-12,Confirmed after follow-up
+BJ-7123,Bianca,West,Ultrasound,2026-10-16,,,2026-10-20,Confirmed first time
+BJ-7124,Alex,East,MR,2026-08-13,2026-08-19,2026-08-24,2026-08-31,Confirmed after follow-up
+BJ-7125,Bianca,East,MR,2026-09-29,2026-10-08,2026-10-15,2026-10-26,Confirmed after follow-up
+BJ-7126,Dani,Island,CT,2026-08-26,,,2026-08-29,Confirmed first time
+BJ-7127,Bianca,West,CT,2026-08-26,2026-09-02,2026-09-07,2026-09-22,Confirmed after follow-up
+BJ-7128,Bianca,Central,X-Ray,2026-08-17,2026-08-25,2026-08-31,,Cancellation due
+BJ-7129,Bianca,North,Ultrasound,2026-09-01,2026-09-07,2026-09-14,2026-09-21,Confirmed after follow-up
+BJ-7130,Alex,North,X-Ray,2026-08-12,2026-08-20,2026-08-28,2026-09-04,Confirmed after follow-up
+BJ-7131,Bianca,North,CT,2026-09-16,2026-09-24,2026-10-03,2026-10-08,Confirmed after follow-up
+BJ-7132,Bianca,West,CT,2026-11-13,,,,Open
+BJ-7133,Alex,East,MR,2026-10-13,2026-10-17,2026-10-23,2026-10-31,Confirmed after follow-up
+BJ-7134,Alex,West,Ultrasound,2026-11-09,2026-11-15,,,Open
+BJ-7135,Bianca,Central,Ultrasound,2026-08-10,2026-08-18,,2026-08-24,Confirmed after follow-up
+BJ-7136,Alex,Island,MR,2026-08-28,2026-09-03,,2026-09-09,Confirmed after follow-up
+BJ-7137,Alex,South,Ultrasound,2026-09-15,,,2026-09-18,Confirmed first time
+BJ-7138,Alex,East,CT,2026-09-28,,,2026-10-03,Confirmed first time
+BJ-7139,Dani,South,X-Ray,2026-09-10,2026-09-15,2026-09-21,2026-10-06,Confirmed after follow-up
+BJ-7140,Bianca,North,CT,2026-08-07,2026-08-13,,2026-08-15,Confirmed after follow-up
+BJ-7141,Callum,South,MR,2026-08-26,2026-09-02,2026-09-11,2026-09-20,Confirmed after follow-up
+BJ-7142,Callum,South,Ultrasound,2026-09-24,2026-09-30,,2026-10-06,Confirmed after follow-up
+BJ-7143,Dani,Island,MR,2026-09-04,2026-09-13,2026-09-19,2026-09-30,Confirmed after follow-up
+BJ-7144,Alex,Island,CT,2026-10-26,2026-11-04,2026-11-12,,Cancellation due
+BJ-7145,Callum,South,X-Ray,2026-11-10,2026-11-16,,,Open
+BJ-7146,Bianca,West,Ultrasound,2026-08-27,2026-09-02,2026-09-10,2026-09-16,Confirmed after follow-up
+BJ-7147,Bianca,West,Ultrasound,2026-10-27,2026-11-03,2026-11-10,2026-11-16,Confirmed after follow-up
+BJ-7148,Dani,North,X-Ray,2026-08-28,,,2026-08-30,Confirmed first time
+BJ-7149,Alex,North,MR,2026-11-16,,,,Open
+BJ-7150,Dani,South,X-Ray,2026-10-09,2026-10-18,2026-10-24,2026-10-28,Confirmed after follow-up
+BJ-7151,Callum,Island,CT,2026-10-02,,,2026-10-09,Confirmed first time
+BJ-7152,Bianca,Island,Ultrasound,2026-10-16,2026-10-22,2026-10-29,2026-11-05,Confirmed after follow-up
+BJ-7153,Callum,South,X-Ray,2026-11-13,,,,Open
+BJ-7154,Alex,East,MR,2026-10-14,,,2026-10-17,Confirmed first time
+BJ-7155,Bianca,North,MR,2026-09-18,,,2026-09-24,Confirmed first time
+BJ-7156,Callum,South,MR,2026-07-31,,,2026-08-07,Confirmed first time
+BJ-7157,Callum,North,CT,2026-08-28,,,2026-08-31,Confirmed first time
+BJ-7158,Dani,East,CT,2026-08-14,2026-08-18,,2026-08-22,Confirmed after follow-up
+BJ-7159,Alex,West,CT,2026-08-25,2026-09-03,,2026-09-08,Confirmed after follow-up
+BJ-7160,Alex,East,CT,2026-08-31,,,2026-09-03,Confirmed first time
+BJ-7161,Alex,South,X-Ray,2026-10-27,2026-10-31,2026-11-04,,Open
+BJ-7162,Callum,East,MR,2026-08-14,2026-08-21,2026-08-28,,Cancellation due
+BJ-7163,Bianca,South,Ultrasound,2026-09-18,2026-09-24,,2026-09-30,Confirmed after follow-up
+BJ-7164,Alex,South,Ultrasound,2026-07-24,2026-07-28,2026-08-05,,Cancellation due
+BJ-7165,Alex,West,X-Ray,2026-08-10,,,2026-08-14,Confirmed first time
+BJ-7166,Callum,Island,CT,2026-09-04,2026-09-09,,2026-09-11,Confirmed after follow-up
+BJ-7167,Alex,North,X-Ray,2026-08-20,2026-08-24,2026-08-29,2026-09-10,Confirmed after follow-up
+BJ-7168,Bianca,North,Ultrasound,2026-08-25,2026-09-03,,2026-09-05,Confirmed after follow-up
+BJ-7169,Alex,South,CT,2026-09-22,2026-09-29,2026-10-03,2026-10-18,Confirmed after follow-up
+BJ-7170,Bianca,South,X-Ray,2026-10-30,2026-11-05,2026-11-11,,Open
+BJ-7171,Dani,South,CT,2026-07-24,2026-07-30,2026-08-07,,Cancellation due
+BJ-7172,Alex,Central,CT,2026-08-19,2026-08-26,2026-08-31,2026-09-07,Confirmed after follow-up
+BJ-7173,Bianca,East,CT,2026-10-06,,,2026-10-12,Confirmed first time
+BJ-7174,Alex,East,CT,2026-08-06,2026-08-14,,2026-08-18,Confirmed after follow-up
+BJ-7175,Alex,East,MR,2026-09-30,2026-10-06,2026-10-14,2026-10-18,Confirmed after follow-up
+BJ-7176,Callum,North,CT,2026-08-03,2026-08-11,,2026-08-13,Confirmed after follow-up
+BJ-7177,Callum,Island,MR,2026-08-28,2026-09-06,2026-09-15,2026-09-21,Confirmed after follow-up
+BJ-7178,Bianca,South,Ultrasound,2026-10-09,2026-10-16,2026-10-22,,Cancellation due
+BJ-7179,Alex,East,Ultrasound,2026-10-14,2026-10-19,2026-10-25,2026-10-26,Confirmed after follow-up
+BJ-7180,Callum,Island,Ultrasound,2026-09-29,2026-10-05,,2026-10-11,Confirmed after follow-up
+BJ-7181,Alex,North,CT,2026-09-02,2026-09-10,,2026-09-18,Confirmed after follow-up
+BJ-7182,Dani,South,CT,2026-10-09,,,2026-10-11,Confirmed first time
+BJ-7183,Alex,Island,X-Ray,2026-09-15,2026-09-21,2026-09-25,2026-10-06,Confirmed after follow-up
+BJ-7184,Alex,East,MR,2026-08-06,2026-08-10,2026-08-17,2026-08-28,Confirmed after follow-up
+BJ-7185,Callum,Island,CT,2026-10-16,2026-10-23,2026-10-27,2026-11-13,Confirmed after follow-up
+BJ-7186,Alex,East,MR,2026-10-09,2026-10-17,,2026-10-25,Confirmed after follow-up
+BJ-7187,Alex,East,X-Ray,2026-07-24,2026-07-30,2026-08-04,2026-08-09,Confirmed after follow-up
+BJ-7188,Callum,South,X-Ray,2026-08-17,2026-08-22,2026-08-27,2026-09-14,Confirmed after follow-up
+BJ-7189,Dani,Central,MR,2026-10-02,2026-10-11,,2026-10-14,Confirmed after follow-up
+BJ-7190,Bianca,South,Ultrasound,2026-09-11,2026-09-20,,2026-09-23,Confirmed after follow-up
+BJ-7191,Callum,East,MR,2026-08-21,2026-08-28,2026-09-04,2026-09-18,Confirmed after follow-up
+BJ-7192,Dani,Island,Ultrasound,2026-09-04,2026-09-09,2026-09-16,2026-09-28,Confirmed after follow-up
+BJ-7193,Bianca,South,CT,2026-09-30,2026-10-07,2026-10-11,2026-10-23,Confirmed after follow-up
+BJ-7194,Bianca,East,X-Ray,2026-10-23,2026-10-29,,2026-11-01,Confirmed after follow-up
+BJ-7195,Callum,North,MR,2026-11-06,,,2026-11-09,Confirmed first time
+BJ-7196,Bianca,North,MR,2026-07-31,2026-08-08,,2026-08-10,Confirmed after follow-up
+BJ-7197,Bianca,Island,X-Ray,2026-09-10,2026-09-18,2026-09-27,2026-10-05,Confirmed after follow-up
+BJ-7198,Alex,Island,X-Ray,2026-09-23,,,2026-09-25,Confirmed first time
+BJ-7199,Alex,East,X-Ray,2026-10-21,2026-10-26,2026-10-31,,Cancellation due
+BJ-7200,Bianca,West,X-Ray,2026-10-30,,,2026-11-03,Confirmed first time
+BJ-7201,Dani,South,MR,2026-08-10,2026-08-17,2026-08-22,2026-08-26,Confirmed after follow-up
+BJ-7202,Callum,Central,CT,2026-07-29,2026-08-07,,2026-08-13,Confirmed after follow-up
+BJ-7203,Callum,East,X-Ray,2026-10-19,,,2026-10-20,Confirmed first time
+BJ-7204,Alex,West,CT,2026-10-23,2026-10-28,2026-11-06,2026-11-08,Confirmed after follow-up
+BJ-7205,Bianca,South,MR,2026-08-14,2026-08-22,2026-08-30,2026-09-08,Confirmed after follow-up
+BJ-7206,Alex,West,CT,2026-11-13,,,,Open
+BJ-7207,Alex,East,Ultrasound,2026-10-21,2026-10-26,2026-11-01,2026-11-15,Confirmed after follow-up
+BJ-7208,Dani,East,MR,2026-09-29,2026-10-05,2026-10-10,2026-10-25,Confirmed after follow-up
+BJ-7209,Callum,Central,X-Ray,2026-11-06,2026-11-15,,,Open
+BJ-7210,Dani,East,CT,2026-11-16,,,,Open
+BJ-7211,Callum,West,X-Ray,2026-10-05,2026-10-10,,2026-10-19,Confirmed after follow-up
+BJ-7212,Dani,East,MR,2026-08-21,2026-08-25,2026-08-29,2026-09-13,Confirmed after follow-up
+BJ-7213,Alex,Island,MR,2026-09-15,,,2026-09-16,Confirmed first time
+BJ-7214,Bianca,North,MR,2026-09-25,2026-10-01,2026-10-08,2026-10-15,Confirmed after follow-up
+BJ-7215,Alex,North,X-Ray,2026-07-31,2026-08-06,2026-08-12,2026-08-17,Confirmed after follow-up
+BJ-7216,Bianca,East,Ultrasound,2026-11-10,,,,Open
+BJ-7217,Dani,North,CT,2026-07-31,2026-08-05,2026-08-11,2026-08-12,Confirmed after follow-up
+BJ-7218,Alex,North,X-Ray,2026-10-22,,,2026-10-31,Confirmed first time
+BJ-7219,Bianca,South,Ultrasound,2026-08-20,2026-08-24,2026-09-01,2026-09-04,Confirmed after follow-up
+BJ-7220,Callum,South,Ultrasound,2026-08-14,2026-08-21,,2026-08-26,Confirmed after follow-up
+BJ-7221,Callum,South,CT,2026-10-30,2026-11-06,2026-11-12,,Open
+BJ-7222,Alex,South,Ultrasound,2026-09-08,2026-09-14,2026-09-19,2026-09-25,Confirmed after follow-up
+BJ-7223,Bianca,North,MR,2026-07-24,,,2026-07-25,Confirmed first time
+BJ-7224,Bianca,East,CT,2026-09-21,2026-09-29,,2026-09-30,Confirmed after follow-up
+BJ-7225,Bianca,East,X-Ray,2026-10-02,2026-10-08,2026-10-13,2026-10-29,Confirmed after follow-up
+BJ-7226,Alex,Island,CT,2026-08-05,,,2026-08-09,Confirmed first time
+BJ-7227,Callum,North,X-Ray,2026-09-04,,,2026-09-05,Confirmed first time
+BJ-7228,Alex,North,X-Ray,2026-08-07,2026-08-16,2026-08-22,2026-08-29,Confirmed after follow-up
+BJ-7229,Callum,West,MR,2026-09-25,,,2026-09-28,Confirmed first time
+BJ-7230,Bianca,Island,Ultrasound,2026-09-22,2026-09-26,,2026-10-03,Confirmed after follow-up
+BJ-7231,Callum,Island,Ultrasound,2026-09-03,2026-09-09,2026-09-17,2026-09-26,Confirmed after follow-up
+BJ-7232,Bianca,Central,X-Ray,2026-10-29,2026-11-06,2026-11-15,,Open
+BJ-7233,Bianca,Island,X-Ray,2026-07-20,2026-07-25,2026-08-01,2026-08-14,Confirmed after follow-up
+BJ-7234,Alex,Island,X-Ray,2026-10-28,2026-11-01,2026-11-08,,Open
+BJ-7235,Callum,East,X-Ray,2026-09-25,2026-10-02,2026-10-10,2026-10-12,Confirmed after follow-up
+BJ-7236,Alex,Island,MR,2026-10-30,2026-11-04,2026-11-13,,Open
+BJ-7237,Alex,East,Ultrasound,2026-11-06,2026-11-14,,,Open
+BJ-7238,Bianca,South,Ultrasound,2026-10-19,,,2026-10-20,Confirmed first time
+BJ-7239,Callum,North,CT,2026-09-11,2026-09-17,,2026-09-24,Confirmed after follow-up
+BJ-7240,Alex,South,MR,2026-08-28,2026-09-04,,2026-09-09,Confirmed after follow-up
+BJ-7241,Alex,West,MR,2026-07-29,2026-08-05,2026-08-12,2026-08-17,Confirmed after follow-up
+BJ-7242,Callum,East,CT,2026-10-22,,,2026-10-25,Confirmed first time
+BJ-7243,Bianca,East,X-Ray,2026-08-13,2026-08-19,2026-08-26,,Cancellation due
+BJ-7244,Dani,North,MR,2026-08-17,2026-08-23,2026-08-31,2026-09-11,Confirmed after follow-up
+BJ-7245,Callum,South,CT,2026-10-05,,,2026-10-09,Confirmed first time
+BJ-7246,Bianca,Island,Ultrasound,2026-07-27,2026-08-02,,2026-08-07,Confirmed after follow-up
+BJ-7247,Callum,West,Ultrasound,2026-09-04,,,2026-09-06,Confirmed first time
+BJ-7248,Alex,East,CT,2026-10-30,2026-11-07,2026-11-14,,Open
+BJ-7249,Dani,East,CT,2026-08-21,,,2026-08-23,Confirmed first time
+BJ-7250,Bianca,East,MR,2026-09-25,2026-10-04,2026-10-09,2026-10-20,Confirmed after follow-up
+BJ-7251,Alex,South,MR,2026-09-25,,,2026-10-03,Confirmed first time
+BJ-7252,Callum,North,CT,2026-11-03,2026-11-11,,,Open
+BJ-7253,Alex,Island,MR,2026-10-19,2026-10-23,,2026-10-26,Confirmed after follow-up
+BJ-7254,Bianca,South,Ultrasound,2026-10-15,2026-10-20,2026-10-26,2026-11-07,Confirmed after follow-up
+BJ-7255,Dani,East,CT,2026-08-25,2026-08-31,2026-09-08,2026-09-19,Confirmed after follow-up
+BJ-7256,Alex,West,CT,2026-08-24,,,2026-08-27,Confirmed first time
+BJ-7257,Callum,South,MR,2026-08-03,2026-08-12,2026-08-17,2026-08-27,Confirmed after follow-up
+BJ-7258,Bianca,East,X-Ray,2026-09-24,2026-10-01,2026-10-08,,Cancellation due
+BJ-7259,Alex,Island,MR,2026-08-14,2026-08-18,2026-08-23,2026-08-25,Confirmed after follow-up
+BJ-7260,Callum,East,CT,2026-09-17,2026-09-24,2026-09-30,2026-10-05,Confirmed after follow-up
+BJ-7261,Alex,North,X-Ray,2026-11-04,2026-11-09,2026-11-14,,Open
+BJ-7262,Callum,Central,X-Ray,2026-07-28,2026-08-06,2026-08-10,2026-08-12,Confirmed after follow-up
+BJ-7263,Bianca,South,MR,2026-07-27,,,2026-07-31,Confirmed first time
+BJ-7264,Bianca,Island,X-Ray,2026-10-30,2026-11-03,2026-11-07,,Open
+BJ-7265,Bianca,North,CT,2026-09-18,2026-09-25,2026-09-29,2026-10-03,Confirmed after follow-up
+BJ-7266,Dani,East,X-Ray,2026-08-21,2026-08-26,2026-08-30,2026-09-10,Confirmed after follow-up
+BJ-7267,Dani,East,CT,2026-09-21,2026-09-27,2026-10-01,2026-10-06,Confirmed after follow-up
+BJ-7268,Alex,North,X-Ray,2026-08-21,,,2026-08-28,Confirmed first time
+BJ-7269,Bianca,East,MR,2026-11-02,2026-11-07,2026-11-13,,Open
+BJ-7270,Bianca,South,Ultrasound,2026-10-02,2026-10-06,2026-10-11,2026-10-17,Confirmed after follow-up
+BJ-7271,Bianca,South,Ultrasound,2026-10-14,,,2026-10-18,Confirmed first time
+BJ-7272,Bianca,Central,MR,2026-08-11,2026-08-20,,2026-08-26,Confirmed after follow-up
+BJ-7273,Callum,Island,CT,2026-08-03,,,2026-08-08,Confirmed first time
+BJ-7274,Callum,East,MR,2026-08-31,,,2026-09-02,Confirmed first time
+BJ-7275,Dani,East,X-Ray,2026-08-11,2026-08-15,2026-08-21,2026-09-07,Confirmed after follow-up
+BJ-7276,Callum,South,Ultrasound,2026-09-08,,,2026-09-11,Confirmed first time
+BJ-7277,Bianca,South,CT,2026-11-12,2026-11-16,,,Open
+BJ-7278,Dani,South,Ultrasound,2026-11-13,,,,Open
+BJ-7279,Dani,East,X-Ray,2026-07-29,2026-08-05,,2026-08-07,Confirmed after follow-up
+BJ-7280,Bianca,Central,CT,2026-09-11,2026-09-15,2026-09-20,,Cancellation due
+BJ-7281,Bianca,South,X-Ray,2026-10-22,2026-10-27,2026-11-04,,Cancellation due
+BJ-7282,Dani,East,MR,2026-10-01,2026-10-07,2026-10-14,2026-10-26,Confirmed after follow-up
+BJ-7283,Dani,South,MR,2026-10-02,2026-10-10,2026-10-19,2026-10-30,Confirmed after follow-up
+BJ-7284,Alex,South,X-Ray,2026-08-27,,,2026-09-02,Confirmed first time
+BJ-7285,Dani,Island,X-Ray,2026-09-18,,,2026-09-22,Confirmed first time
+BJ-7286,Callum,North,X-Ray,2026-08-17,2026-08-26,2026-09-02,2026-09-03,Confirmed after follow-up
+BJ-7287,Alex,Island,Ultrasound,2026-09-24,2026-09-29,,2026-09-30,Confirmed after follow-up
+BJ-7288,Bianca,South,CT,2026-08-25,2026-09-01,2026-09-09,,Cancellation due
+BJ-7289,Bianca,Central,X-Ray,2026-11-04,2026-11-09,2026-11-13,,Open
+BJ-7290,Dani,East,X-Ray,2026-11-05,2026-11-14,,,Open
+BJ-7291,Alex,Island,X-Ray,2026-08-12,2026-08-19,2026-08-24,2026-09-09,Confirmed after follow-up
+BJ-7292,Dani,East,X-Ray,2026-11-04,2026-11-10,2026-11-16,,Open
+BJ-7293,Bianca,South,CT,2026-10-26,2026-10-31,2026-11-04,2026-11-12,Confirmed after follow-up
+BJ-7294,Alex,West,CT,2026-09-25,2026-09-30,,2026-10-02,Confirmed after follow-up
+BJ-7295,Bianca,East,MR,2026-10-09,,,2026-10-10,Confirmed first time
+BJ-7296,Callum,Island,X-Ray,2026-09-29,,,2026-10-03,Confirmed first time
+BJ-7297,Callum,West,MR,2026-08-25,2026-08-30,,2026-09-01,Confirmed after follow-up
+BJ-7298,Bianca,West,CT,2026-07-31,2026-08-06,2026-08-13,2026-08-18,Confirmed after follow-up
+BJ-7299,Bianca,Island,CT,2026-11-10,,,,Open
+BJ-7300,Alex,West,Ultrasound,2026-11-13,,,,Open
+BJ-7301,Bianca,North,CT,2026-08-25,2026-09-01,,2026-09-07,Confirmed after follow-up
+BJ-7302,Bianca,East,CT,2026-10-16,2026-10-22,2026-10-29,2026-11-03,Confirmed after follow-up
+BJ-7303,Bianca,East,CT,2026-07-24,2026-07-28,2026-08-02,2026-08-18,Confirmed after follow-up
+BJ-7304,Callum,Central,MR,2026-09-11,2026-09-20,,2026-09-21,Confirmed after follow-up
+BJ-7305,Alex,South,CT,2026-08-05,2026-08-11,2026-08-20,,Cancellation due
+BJ-7306,Alex,East,Ultrasound,2026-07-17,2026-07-26,2026-07-30,2026-08-09,Confirmed after follow-up
+BJ-7307,Bianca,South,X-Ray,2026-08-12,2026-08-20,2026-08-26,,Cancellation due
+BJ-7308,Alex,West,MR,2026-11-16,,,,Open
+BJ-7309,Dani,North,Ultrasound,2026-10-28,2026-11-03,2026-11-07,2026-11-16,Confirmed after follow-up
+BJ-7310,Bianca,North,MR,2026-11-06,2026-11-13,,,Open
+BJ-7311,Alex,East,X-Ray,2026-07-29,,,2026-07-30,Confirmed first time
+BJ-7312,Alex,South,CT,2026-10-14,2026-10-19,,2026-10-25,Confirmed after follow-up
+BJ-7313,Dani,West,X-Ray,2026-08-14,2026-08-19,2026-08-25,2026-09-10,Confirmed after follow-up
+BJ-7314,Bianca,East,CT,2026-09-15,2026-09-21,,2026-09-25,Confirmed after follow-up
+BJ-7315,Callum,Island,CT,2026-07-23,2026-07-27,2026-08-01,2026-08-04,Confirmed after follow-up
+BJ-7316,Callum,South,Ultrasound,2026-09-04,,,2026-09-13,Confirmed first time
+BJ-7317,Bianca,East,Ultrasound,2026-08-06,,,2026-08-07,Confirmed first time
+BJ-7318,Bianca,South,CT,2026-11-13,,,,Open
+BJ-7319,Dani,East,MR,2026-11-13,,,,Open
+BJ-7320,Bianca,South,CT,2026-07-20,2026-07-24,,2026-07-27,Confirmed after follow-up
+BJ-7321,Bianca,West,CT,2026-10-07,2026-10-11,2026-10-16,2026-10-31,Confirmed after follow-up
+BJ-7322,Callum,Island,Ultrasound,2026-10-09,2026-10-14,2026-10-19,2026-10-28,Confirmed after follow-up
+BJ-7323,Dani,West,CT,2026-07-24,2026-08-02,,2026-08-05,Confirmed after follow-up
+BJ-7324,Dani,East,X-Ray,2026-10-02,2026-10-09,2026-10-16,2026-10-30,Confirmed after follow-up
+BJ-7325,Alex,East,Ultrasound,2026-08-31,2026-09-04,2026-09-10,2026-09-11,Confirmed after follow-up
+BJ-7326,Callum,South,CT,2026-10-12,2026-10-16,2026-10-21,2026-11-01,Confirmed after follow-up
+BJ-7327,Callum,South,CT,2026-08-20,2026-08-24,,2026-09-01,Confirmed after follow-up
+BJ-7328,Callum,Central,MR,2026-08-04,,,2026-08-12,Confirmed first time
+BJ-7329,Alex,East,Ultrasound,2026-08-11,2026-08-16,2026-08-23,2026-09-02,Confirmed after follow-up
+BJ-7330,Bianca,South,CT,2026-09-02,2026-09-11,2026-09-19,2026-09-29,Confirmed after follow-up
+BJ-7331,Alex,Central,CT,2026-11-13,,,,Open
+BJ-7332,Bianca,West,CT,2026-10-16,2026-10-25,2026-10-29,2026-11-04,Confirmed after follow-up
+BJ-7333,Dani,South,CT,2026-08-12,2026-08-20,2026-08-27,2026-09-03,Confirmed after follow-up
+BJ-7334,Callum,East,X-Ray,2026-10-30,,,2026-11-06,Confirmed first time
+BJ-7335,Callum,South,CT,2026-09-16,2026-09-23,,2026-09-25,Confirmed after follow-up
+BJ-7336,Callum,Central,X-Ray,2026-09-17,,,2026-09-26,Confirmed first time
+BJ-7337,Alex,East,CT,2026-09-25,2026-10-04,2026-10-10,2026-10-12,Confirmed after follow-up
+BJ-7338,Bianca,South,X-Ray,2026-10-21,2026-10-27,2026-11-04,2026-11-15,Confirmed after follow-up
+BJ-7339,Bianca,South,Ultrasound,2026-10-19,2026-10-23,2026-10-29,2026-11-12,Confirmed after follow-up
+BJ-7340,Bianca,East,CT,2026-09-08,2026-09-16,,2026-09-22,Confirmed after follow-up
+BJ-7341,Bianca,East,X-Ray,2026-07-30,2026-08-08,2026-08-16,2026-08-17,Confirmed after follow-up
+BJ-7342,Bianca,South,MR,2026-08-07,2026-08-11,2026-08-16,2026-08-20,Confirmed after follow-up
+BJ-7343,Bianca,North,X-Ray,2026-09-21,2026-09-28,2026-10-05,2026-10-14,Confirmed after follow-up
+BJ-7344,Alex,South,X-Ray,2026-08-21,2026-08-26,2026-09-02,2026-09-04,Confirmed after follow-up
+BJ-7345,Alex,North,MR,2026-07-31,,,2026-08-03,Confirmed first time
+BJ-7346,Dani,South,MR,2026-10-27,2026-11-01,2026-11-09,2026-11-13,Confirmed after follow-up
+BJ-7347,Callum,East,Ultrasound,2026-10-02,2026-10-07,,2026-10-14,Confirmed after follow-up
+BJ-7348,Alex,Central,Ultrasound,2026-08-25,2026-08-30,2026-09-04,2026-09-06,Confirmed after follow-up
+BJ-7349,Dani,West,Ultrasound,2026-10-09,,,2026-10-10,Confirmed first time
+BJ-7350,Callum,East,X-Ray,2026-07-31,2026-08-06,2026-08-12,2026-08-15,Confirmed after follow-up
+BJ-7351,Callum,South,X-Ray,2026-07-30,2026-08-07,,2026-08-08,Confirmed after follow-up
+BJ-7352,Bianca,East,Ultrasound,2026-11-06,2026-11-13,,,Open
+BJ-7353,Alex,North,Ultrasound,2026-09-28,,,2026-09-30,Confirmed first time
+BJ-7354,Alex,East,X-Ray,2026-09-17,2026-09-25,,2026-09-30,Confirmed after follow-up
+BJ-7355,Bianca,North,Ultrasound,2026-08-13,2026-08-17,2026-08-26,2026-09-08,Confirmed after follow-up
+BJ-7356,Bianca,North,Ultrasound,2026-08-27,2026-08-31,,2026-09-03,Confirmed after follow-up
+BJ-7357,Callum,West,Ultrasound,2026-07-24,2026-08-01,2026-08-08,2026-08-15,Confirmed after follow-up
+BJ-7358,Callum,South,CT,2026-07-21,,,2026-07-25,Confirmed first time
+BJ-7359,Alex,South,MR,2026-10-16,,,2026-10-19,Confirmed first time
+BJ-7360,Bianca,East,X-Ray,2026-09-04,2026-09-11,2026-09-15,2026-09-18,Confirmed after follow-up
+BJ-7361,Callum,South,Ultrasound,2026-09-07,2026-09-12,2026-09-20,2026-09-25,Confirmed after follow-up
+BJ-7362,Bianca,East,MR,2026-08-26,2026-09-01,2026-09-10,2026-09-12,Confirmed after follow-up
+BJ-7363,Bianca,East,Ultrasound,2026-08-28,,,2026-08-29,Confirmed first time
+BJ-7364,Callum,North,CT,2026-08-21,2026-08-27,2026-09-02,,Cancellation due
+BJ-7365,Callum,South,CT,2026-10-12,2026-10-17,2026-10-21,2026-10-26,Confirmed after follow-up
+BJ-7366,Dani,South,X-Ray,2026-11-13,,,,Open
+BJ-7367,Alex,Central,Ultrasound,2026-08-18,,,2026-08-22,Confirmed first time
+BJ-7368,Alex,Central,CT,2026-08-14,2026-08-21,2026-08-27,2026-09-09,Confirmed after follow-up
+BJ-7369,Dani,East,CT,2026-10-30,2026-11-05,2026-11-09,2026-11-13,Confirmed after follow-up
+BJ-7370,Alex,West,X-Ray,2026-09-25,2026-09-30,,2026-10-01,Confirmed after follow-up
+BJ-7371,Bianca,North,X-Ray,2026-08-07,2026-08-12,2026-08-21,2026-08-22,Confirmed after follow-up
+BJ-7372,Bianca,East,X-Ray,2026-08-03,,,2026-08-08,Confirmed first time
+BJ-7373,Dani,East,Ultrasound,2026-09-16,2026-09-23,2026-09-30,2026-10-12,Confirmed after follow-up
+BJ-7374,Alex,West,MR,2026-08-14,2026-08-22,2026-08-29,,Cancellation due
+BJ-7375,Dani,Central,Ultrasound,2026-10-16,2026-10-23,2026-10-27,,Cancellation due
+BJ-7376,Dani,West,MR,2026-08-13,2026-08-22,,2026-08-25,Confirmed after follow-up
+BJ-7377,Callum,North,X-Ray,2026-09-14,2026-09-20,2026-09-25,2026-10-02,Confirmed after follow-up
+BJ-7378,Alex,South,X-Ray,2026-10-09,2026-10-13,2026-10-19,2026-11-01,Confirmed after follow-up
+BJ-7379,Bianca,Island,CT,2026-08-07,2026-08-11,2026-08-16,2026-08-17,Confirmed after follow-up
+BJ-7380,Bianca,South,MR,2026-10-02,2026-10-06,2026-10-13,2026-10-27,Confirmed after follow-up
+BJ-7381,Bianca,Island,Ultrasound,2026-08-18,2026-08-22,2026-08-29,2026-09-02,Confirmed after follow-up
+BJ-7382,Alex,East,Ultrasound,2026-07-28,2026-08-02,,2026-08-07,Confirmed after follow-up
+BJ-7383,Callum,South,X-Ray,2026-11-13,,,,Open
+BJ-7384,Bianca,North,X-Ray,2026-08-14,2026-08-19,2026-08-24,2026-08-27,Confirmed after follow-up
+BJ-7385,Bianca,East,X-Ray,2026-11-06,,,2026-11-14,Confirmed first time
+BJ-7386,Dani,East,MR,2026-10-13,,,2026-10-18,Confirmed first time
+BJ-7387,Bianca,South,Ultrasound,2026-09-18,2026-09-26,2026-10-01,,Cancellation due
+BJ-7388,Callum,East,CT,2026-09-25,,,2026-09-29,Confirmed first time
+BJ-7389,Alex,Central,X-Ray,2026-08-04,,,2026-08-07,Confirmed first time
+BJ-7390,Dani,East,X-Ray,2026-09-17,2026-09-22,2026-09-27,2026-10-15,Confirmed after follow-up
+BJ-7391,Bianca,East,Ultrasound,2026-09-21,2026-09-27,,2026-10-02,Confirmed after follow-up
+BJ-7392,Callum,East,CT,2026-10-12,2026-10-16,2026-10-25,2026-11-02,Confirmed after follow-up
+BJ-7393,Bianca,Island,CT,2026-08-19,2026-08-28,2026-09-04,2026-09-05,Confirmed after follow-up
+BJ-7394,Bianca,South,X-Ray,2026-07-24,2026-07-28,2026-08-03,2026-08-10,Confirmed after follow-up
+BJ-7395,Bianca,East,CT,2026-08-05,2026-08-14,2026-08-22,2026-08-23,Confirmed after follow-up
+BJ-7396,Bianca,South,MR,2026-09-25,,,2026-09-29,Confirmed first time
+BJ-7397,Bianca,South,Ultrasound,2026-10-01,2026-10-05,2026-10-11,,Cancellation due
+BJ-7398,Bianca,North,MR,2026-09-09,2026-09-15,2026-09-21,2026-10-05,Confirmed after follow-up
+BJ-7399,Dani,East,CT,2026-09-02,2026-09-11,2026-09-19,2026-09-30,Confirmed after follow-up
+BJ-7400,Dani,South,CT,2026-09-04,,,2026-09-09,Confirmed first time
+BJ-7401,Alex,East,MR,2026-08-26,2026-09-01,2026-09-05,2026-09-17,Confirmed after follow-up
+BJ-7402,Dani,East,Ultrasound,2026-07-28,2026-08-03,2026-08-07,2026-08-20,Confirmed after follow-up
+BJ-7403,Alex,East,Ultrasound,2026-10-05,2026-10-10,2026-10-17,2026-11-01,Confirmed after follow-up
+BJ-7404,Callum,East,Ultrasound,2026-10-05,,,2026-10-06,Confirmed first time
+BJ-7405,Bianca,East,Ultrasound,2026-10-27,2026-11-03,,2026-11-05,Confirmed after follow-up
+BJ-7406,Alex,South,X-Ray,2026-10-28,2026-11-04,2026-11-10,,Open
+BJ-7407,Callum,East,CT,2026-08-07,2026-08-14,2026-08-18,2026-09-01,Confirmed after follow-up
+BJ-7408,Dani,North,CT,2026-11-03,2026-11-07,2026-11-12,,Open
+BJ-7409,Bianca,Central,CT,2026-10-13,2026-10-21,2026-10-29,2026-11-09,Confirmed after follow-up
+BJ-7410,Callum,East,MR,2026-10-09,2026-10-18,2026-10-27,2026-11-03,Confirmed after follow-up
+BJ-7411,Dani,Island,Ultrasound,2026-09-11,2026-09-19,2026-09-24,2026-10-06,Confirmed after follow-up
+BJ-7412,Alex,Central,X-Ray,2026-09-11,2026-09-19,2026-09-23,2026-09-30,Confirmed after follow-up
+BJ-7413,Bianca,West,Ultrasound,2026-09-08,,,2026-09-09,Confirmed first time
+BJ-7414,Alex,East,X-Ray,2026-11-12,2026-11-16,,,Open
+BJ-7415,Bianca,Central,CT,2026-08-18,2026-08-26,2026-09-04,2026-09-08,Confirmed after follow-up
+BJ-7416,Bianca,South,Ultrasound,2026-08-27,,,2026-08-31,Confirmed first time
+BJ-7417,Callum,Island,CT,2026-09-04,,,2026-09-05,Confirmed first time
+BJ-7418,Dani,Island,CT,2026-07-27,2026-08-03,,2026-08-10,Confirmed after follow-up
+BJ-7419,Alex,West,CT,2026-08-18,2026-08-24,2026-09-01,2026-09-11,Confirmed after follow-up
+BJ-7420,Alex,Island,MR,2026-09-18,2026-09-26,,2026-09-27,Confirmed after follow-up
+BJ-7421,Alex,West,X-Ray,2026-07-24,2026-08-01,,2026-08-04,Confirmed after follow-up
+BJ-7422,Dani,West,MR,2026-10-28,2026-11-01,,2026-11-05,Confirmed after follow-up
+BJ-7423,Bianca,West,X-Ray,2026-08-21,2026-08-25,2026-09-01,2026-09-13,Confirmed after follow-up
+BJ-7424,Dani,South,Ultrasound,2026-08-28,,,2026-08-29,Confirmed first time
+BJ-7425,Callum,Island,X-Ray,2026-10-09,2026-10-17,,2026-10-26,Confirmed after follow-up
+BJ-7426,Alex,Central,CT,2026-10-13,2026-10-20,2026-10-25,2026-10-30,Confirmed after follow-up
+BJ-7427,Bianca,Central,X-Ray,2026-08-07,2026-08-12,2026-08-17,2026-09-01,Confirmed after follow-up
+BJ-7428,Alex,South,CT,2026-08-14,2026-08-22,2026-08-29,,Cancellation due
+BJ-7429,Bianca,East,Ultrasound,2026-07-24,2026-08-01,2026-08-07,2026-08-21,Confirmed after follow-up
+BJ-7430,Bianca,North,MR,2026-09-11,2026-09-17,2026-09-25,2026-10-04,Confirmed after follow-up
+BJ-7431,Dani,North,MR,2026-09-11,,,2026-09-20,Confirmed first time
+BJ-7432,Alex,West,CT,2026-08-27,2026-09-02,2026-09-10,2026-09-13,Confirmed after follow-up
+BJ-7433,Alex,Island,CT,2026-09-22,2026-09-29,,2026-10-04,Confirmed after follow-up
+BJ-7434,Dani,East,MR,2026-09-24,2026-10-01,,2026-10-09,Confirmed after follow-up
+BJ-7435,Bianca,East,CT,2026-11-06,2026-11-13,,,Open
+BJ-7436,Bianca,East,CT,2026-08-28,2026-09-03,2026-09-09,2026-09-20,Confirmed after follow-up
+BJ-7437,Callum,Island,Ultrasound,2026-08-07,2026-08-12,2026-08-17,,Cancellation due
+BJ-7438,Bianca,East,Ultrasound,2026-08-21,2026-08-28,2026-09-02,,Cancellation due
+BJ-7439,Alex,South,Ultrasound,2026-08-13,2026-08-21,2026-08-27,2026-09-07,Confirmed after follow-up
+BJ-7440,Callum,South,X-Ray,2026-10-12,2026-10-21,2026-10-27,2026-11-08,Confirmed after follow-up
+BJ-7441,Callum,East,CT,2026-10-23,2026-11-01,2026-11-10,,Cancellation due
+BJ-7442,Callum,West,MR,2026-09-23,2026-10-01,2026-10-10,,Cancellation due
+BJ-7443,Bianca,Island,MR,2026-08-13,2026-08-22,,2026-08-29,Confirmed after follow-up
+BJ-7444,Dani,East,CT,2026-11-06,2026-11-10,2026-11-16,,Open
+BJ-7445,Alex,North,MR,2026-09-18,,,2026-09-24,Confirmed first time
+BJ-7446,Bianca,East,CT,2026-09-17,2026-09-25,2026-10-01,2026-10-13,Confirmed after follow-up
+BJ-7447,Callum,East,Ultrasound,2026-10-09,2026-10-14,,2026-10-20,Confirmed after follow-up
+BJ-7448,Alex,East,X-Ray,2026-10-30,2026-11-06,2026-11-13,,Open
+BJ-7449,Alex,West,MR,2026-09-18,,,2026-09-20,Confirmed first time
+BJ-7450,Bianca,Island,X-Ray,2026-07-27,,,2026-07-30,Confirmed first time
+BJ-7451,Bianca,Island,CT,2026-11-12,,,,Open
+BJ-7452,Bianca,North,X-Ray,2026-08-10,2026-08-18,2026-08-24,2026-08-28,Confirmed after follow-up
+BJ-7453,Callum,West,CT,2026-08-21,2026-08-30,,2026-09-01,Confirmed after follow-up
+BJ-7454,Bianca,Central,X-Ray,2026-09-30,2026-10-08,2026-10-14,2026-10-26,Confirmed after follow-up
+BJ-7455,Bianca,Central,CT,2026-08-19,2026-08-24,2026-09-02,,Cancellation due
+BJ-7456,Alex,East,MR,2026-08-27,2026-09-02,,2026-09-07,Confirmed after follow-up
+BJ-7457,Callum,East,MR,2026-08-26,2026-09-02,,2026-09-05,Confirmed after follow-up
+BJ-7458,Bianca,Island,X-Ray,2026-08-07,2026-08-15,2026-08-23,2026-09-01,Confirmed after follow-up
+BJ-7459,Dani,East,MR,2026-07-28,2026-08-03,2026-08-11,2026-08-16,Confirmed after follow-up
+BJ-7460,Dani,South,X-Ray,2026-09-03,,,2026-09-06,Confirmed first time
+BJ-7461,Bianca,Central,MR,2026-10-16,2026-10-22,2026-10-31,,Cancellation due
+BJ-7462,Alex,East,CT,2026-09-15,,,2026-09-20,Confirmed first time
+BJ-7463,Callum,North,MR,2026-09-29,2026-10-05,,2026-10-11,Confirmed after follow-up
+BJ-7464,Callum,Island,Ultrasound,2026-09-04,2026-09-12,,2026-09-20,Confirmed after follow-up
+BJ-7465,Callum,North,Ultrasound,2026-11-13,,,,Open
+BJ-7466,Alex,East,X-Ray,2026-10-15,2026-10-22,2026-10-31,2026-11-11,Confirmed after follow-up
+BJ-7467,Bianca,North,MR,2026-10-06,2026-10-12,2026-10-16,2026-10-25,Confirmed after follow-up
+BJ-7468,Callum,Island,X-Ray,2026-09-04,2026-09-08,2026-09-17,2026-09-19,Confirmed after follow-up
+BJ-7469,Alex,West,Ultrasound,2026-09-11,2026-09-17,2026-09-26,2026-10-04,Confirmed after follow-up
+BJ-7470,Alex,North,MR,2026-10-27,2026-11-03,2026-11-12,,Open
+BJ-7471,Callum,South,Ultrasound,2026-09-25,2026-10-04,2026-10-09,2026-10-18,Confirmed after follow-up
+BJ-7472,Dani,South,MR,2026-10-02,,,2026-10-06,Confirmed first time
+BJ-7473,Alex,South,X-Ray,2026-08-25,2026-08-30,,2026-09-03,Confirmed after follow-up
+BJ-7474,Bianca,South,Ultrasound,2026-08-21,2026-08-28,2026-09-04,2026-09-06,Confirmed after follow-up
+BJ-7475,Callum,East,X-Ray,2026-09-28,2026-10-04,2026-10-12,2026-10-23,Confirmed after follow-up
+BJ-7476,Alex,South,CT,2026-10-09,2026-10-16,2026-10-24,2026-10-28,Confirmed after follow-up
+BJ-7477,Bianca,East,MR,2026-08-28,2026-09-02,2026-09-10,2026-09-18,Confirmed after follow-up
+BJ-7478,Dani,Island,MR,2026-09-04,2026-09-10,2026-09-17,2026-09-20,Confirmed after follow-up
+BJ-7479,Callum,Island,Ultrasound,2026-09-14,2026-09-21,,2026-09-23,Confirmed after follow-up
+BJ-7480,Callum,West,Ultrasound,2026-09-18,,,2026-09-24,Confirmed first time
+BJ-7481,Bianca,West,MR,2026-08-24,2026-09-02,2026-09-06,2026-09-19,Confirmed after follow-up
+BJ-7482,Bianca,East,X-Ray,2026-07-31,2026-08-09,,2026-08-12,Confirmed after follow-up
+BJ-7483,Bianca,Island,MR,2026-08-14,2026-08-19,2026-08-25,2026-08-30,Confirmed after follow-up
+BJ-7484,Callum,East,Ultrasound,2026-08-13,2026-08-18,2026-08-26,2026-08-29,Confirmed after follow-up
+BJ-7485,Callum,East,X-Ray,2026-07-31,2026-08-07,2026-08-16,2026-08-24,Confirmed after follow-up
+BJ-7486,Callum,Island,CT,2026-11-05,2026-11-14,,,Open
+BJ-7487,Dani,East,MR,2026-11-03,2026-11-10,2026-11-15,,Open
+BJ-7488,Alex,South,X-Ray,2026-09-03,,,2026-09-05,Confirmed first time
+BJ-7489,Callum,South,X-Ray,2026-09-25,2026-09-30,2026-10-04,2026-10-08,Confirmed after follow-up
+BJ-7490,Alex,North,CT,2026-07-21,,,2026-07-23,Confirmed first time
+BJ-7491,Alex,North,MR,2026-09-11,2026-09-20,2026-09-29,2026-10-05,Confirmed after follow-up
+BJ-7492,Bianca,Island,Ultrasound,2026-11-05,2026-11-11,2026-11-16,,Open
+BJ-7493,Dani,Central,X-Ray,2026-08-28,2026-09-03,2026-09-08,2026-09-11,Confirmed after follow-up
+BJ-7494,Callum,Island,Ultrasound,2026-09-01,2026-09-09,2026-09-16,2026-09-25,Confirmed after follow-up
+BJ-7495,Bianca,South,X-Ray,2026-10-09,2026-10-18,2026-10-22,2026-10-28,Confirmed after follow-up
+BJ-7496,Bianca,East,CT,2026-08-31,2026-09-08,2026-09-12,2026-09-25,Confirmed after follow-up
+BJ-7497,Dani,South,X-Ray,2026-07-17,,,2026-07-19,Confirmed first time
+BJ-7498,Callum,East,CT,2026-08-03,,,2026-08-08,Confirmed first time
+BJ-7499,Callum,North,CT,2026-09-24,,,2026-09-27,Confirmed first time
+BJ-7500,Bianca,South,X-Ray,2026-11-06,2026-11-10,,,Open
+BJ-7501,Alex,East,X-Ray,2026-10-13,2026-10-22,2026-10-28,2026-11-03,Confirmed after follow-up
+BJ-7502,Bianca,Central,MR,2026-11-06,2026-11-12,,,Open
+BJ-7503,Alex,North,CT,2026-09-30,,,2026-10-05,Confirmed first time
+BJ-7504,Callum,North,X-Ray,2026-07-28,2026-08-04,2026-08-09,,Cancellation due
+BJ-7505,Alex,West,CT,2026-08-07,,,2026-08-13,Confirmed first time
+BJ-7506,Bianca,Island,X-Ray,2026-10-29,2026-11-06,,2026-11-13,Confirmed after follow-up
+BJ-7507,Dani,North,MR,2026-10-02,2026-10-11,2026-10-18,2026-10-22,Confirmed after follow-up
+BJ-7508,Bianca,South,CT,2026-10-08,2026-10-14,2026-10-21,2026-10-24,Confirmed after follow-up
+BJ-7509,Bianca,North,MR,2026-10-28,2026-11-02,2026-11-06,,Open
+BJ-7510,Bianca,Island,CT,2026-10-02,,,2026-10-04,Confirmed first time
+BJ-7511,Bianca,North,Ultrasound,2026-09-25,2026-10-01,2026-10-05,2026-10-22,Confirmed after follow-up
+BJ-7512,Callum,North,X-Ray,2026-10-07,,,2026-10-11,Confirmed first time
+BJ-7513,Dani,North,X-Ray,2026-08-03,2026-08-10,2026-08-16,2026-08-23,Confirmed after follow-up
+BJ-7514,Alex,North,CT,2026-09-09,2026-09-17,2026-09-24,2026-10-03,Confirmed after follow-up
+BJ-7515,Callum,East,MR,2026-09-28,2026-10-03,,2026-10-06,Confirmed after follow-up
+BJ-7516,Alex,South,MR,2026-09-04,2026-09-09,,2026-09-12,Confirmed after follow-up
+BJ-7517,Alex,North,Ultrasound,2026-07-29,2026-08-05,2026-08-10,,Cancellation due
+BJ-7518,Bianca,East,Ultrasound,2026-10-23,2026-10-28,,2026-11-02,Confirmed after follow-up
+BJ-7519,Alex,Island,MR,2026-10-07,2026-10-11,,2026-10-13,Confirmed after follow-up
+BJ-7520,Callum,South,MR,2026-10-15,2026-10-22,2026-10-26,2026-11-09,Confirmed after follow-up
+BJ-7521,Bianca,South,Ultrasound,2026-10-27,2026-11-02,,2026-11-05,Confirmed after follow-up
+BJ-7522,Dani,South,CT,2026-09-29,2026-10-08,2026-10-14,2026-10-17,Confirmed after follow-up
+BJ-7523,Bianca,East,X-Ray,2026-10-09,2026-10-14,2026-10-21,2026-11-02,Confirmed after follow-up
+BJ-7524,Callum,South,X-Ray,2026-09-10,2026-09-16,2026-09-24,2026-09-25,Confirmed after follow-up
+BJ-7525,Dani,North,X-Ray,2026-07-28,,,2026-08-01,Confirmed first time
+BJ-7526,Bianca,East,X-Ray,2026-10-14,2026-10-23,2026-10-31,2026-11-09,Confirmed after follow-up
+BJ-7527,Callum,East,MR,2026-10-07,2026-10-13,2026-10-20,2026-10-23,Confirmed after follow-up
+BJ-7528,Callum,South,CT,2026-11-06,2026-11-12,,,Open
+BJ-7529,Dani,South,MR,2026-11-06,2026-11-14,,,Open
+BJ-7530,Callum,Island,X-Ray,2026-09-17,2026-09-25,,2026-10-03,Confirmed after follow-up
+BJ-7531,Alex,North,Ultrasound,2026-10-23,2026-10-27,2026-11-05,,Cancellation due
+BJ-7532,Alex,Island,MR,2026-10-09,,,2026-10-13,Confirmed first time
+BJ-7533,Bianca,East,MR,2026-11-12,2026-11-16,,,Open
+BJ-7534,Alex,East,MR,2026-09-25,2026-10-04,2026-10-11,2026-10-17,Confirmed after follow-up
+BJ-7535,Alex,Island,CT,2026-07-17,,,2026-07-19,Confirmed first time
+BJ-7536,Dani,South,CT,2026-10-23,2026-10-29,2026-11-06,,Cancellation due
+BJ-7537,Bianca,South,Ultrasound,2026-09-08,2026-09-13,,2026-09-21,Confirmed after follow-up
+BJ-7538,Bianca,East,X-Ray,2026-07-22,2026-07-30,2026-08-06,2026-08-07,Confirmed after follow-up
+BJ-7539,Callum,South,MR,2026-09-07,2026-09-14,2026-09-19,2026-09-30,Confirmed after follow-up
+BJ-7540,Alex,West,MR,2026-07-20,,,2026-07-28,Confirmed first time
+BJ-7541,Alex,North,MR,2026-09-22,2026-09-26,2026-10-04,2026-10-06,Confirmed after follow-up
+BJ-7542,Bianca,North,Ultrasound,2026-10-06,,,2026-10-07,Confirmed first time
+BJ-7543,Dani,North,CT,2026-08-24,2026-08-29,2026-09-06,2026-09-16,Confirmed after follow-up
+BJ-7544,Dani,East,X-Ray,2026-08-10,2026-08-14,2026-08-18,2026-09-01,Confirmed after follow-up
+BJ-7545,Callum,North,X-Ray,2026-10-29,,,2026-11-03,Confirmed first time
+BJ-7546,Bianca,North,MR,2026-11-13,,,,Open
+BJ-7547,Bianca,East,MR,2026-11-06,2026-11-11,,,Open
+BJ-7548,Callum,North,X-Ray,2026-08-07,,,2026-08-16,Confirmed first time
+BJ-7549,Dani,South,CT,2026-08-07,2026-08-14,2026-08-23,2026-08-25,Confirmed after follow-up
+BJ-7550,Bianca,Island,X-Ray,2026-09-14,2026-09-19,,2026-09-25,Confirmed after follow-up
+BJ-7551,Alex,North,CT,2026-09-25,2026-10-02,2026-10-07,2026-10-16,Confirmed after follow-up
+BJ-7552,Dani,North,Ultrasound,2026-11-12,,,,Open
+BJ-7553,Alex,Central,CT,2026-10-23,2026-10-30,2026-11-07,,Cancellation due
+BJ-7554,Alex,South,CT,2026-11-03,2026-11-08,2026-11-16,,Open
+BJ-7555,Alex,West,Ultrasound,2026-07-29,2026-08-04,2026-08-09,,Cancellation due
+BJ-7556,Callum,North,Ultrasound,2026-11-02,2026-11-10,2026-11-15,,Open
+BJ-7557,Bianca,East,MR,2026-11-16,,,,Open
+BJ-7558,Callum,North,X-Ray,2026-09-10,2026-09-14,,2026-09-17,Confirmed after follow-up
+BJ-7559,Bianca,North,X-Ray,2026-07-29,2026-08-06,2026-08-10,2026-08-23,Confirmed after follow-up
+BJ-7560,Bianca,South,CT,2026-10-02,,,2026-10-04,Confirmed first time
+BJ-7561,Dani,South,MR,2026-09-04,2026-09-09,2026-09-18,2026-09-30,Confirmed after follow-up
+BJ-7562,Bianca,South,Ultrasound,2026-08-13,2026-08-20,2026-08-27,2026-09-04,Confirmed after follow-up
+BJ-7563,Alex,East,Ultrasound,2026-10-23,2026-11-01,2026-11-09,,Cancellation due
+BJ-7564,Alex,North,MR,2026-08-28,2026-09-03,,2026-09-08,Confirmed after follow-up
+BJ-7565,Bianca,South,CT,2026-10-09,2026-10-16,2026-10-25,2026-11-04,Confirmed after follow-up
+BJ-7566,Alex,East,CT,2026-11-02,2026-11-06,,2026-11-12,Confirmed after follow-up
+BJ-7567,Dani,East,MR,2026-08-11,2026-08-15,,2026-08-19,Confirmed after follow-up
+BJ-7568,Alex,South,X-Ray,2026-08-10,,,2026-08-14,Confirmed first time
+BJ-7569,Bianca,South,MR,2026-09-22,2026-09-28,2026-10-02,2026-10-13,Confirmed after follow-up
+BJ-7570,Bianca,South,X-Ray,2026-11-11,,,,Open
+BJ-7571,Dani,South,MR,2026-09-07,,,2026-09-12,Confirmed first time
+BJ-7572,Dani,South,MR,2026-08-28,2026-09-04,2026-09-10,2026-09-18,Confirmed after follow-up
+BJ-7573,Bianca,West,X-Ray,2026-08-25,2026-09-03,2026-09-11,2026-09-17,Confirmed after follow-up
+BJ-7574,Callum,Island,CT,2026-10-20,2026-10-26,,2026-11-02,Confirmed after follow-up
+BJ-7575,Bianca,East,CT,2026-08-10,2026-08-14,2026-08-21,2026-09-03,Confirmed after follow-up
+BJ-7576,Bianca,North,CT,2026-08-07,2026-08-16,,2026-08-17,Confirmed after follow-up
+BJ-7577,Callum,East,CT,2026-08-07,2026-08-16,2026-08-23,2026-09-03,Confirmed after follow-up
+BJ-7578,Alex,Central,X-Ray,2026-11-11,,,,Open
+BJ-7579,Dani,South,X-Ray,2026-09-07,2026-09-16,2026-09-24,2026-09-30,Confirmed after follow-up
+BJ-7580,Callum,West,MR,2026-07-31,2026-08-04,,2026-08-10,Confirmed after follow-up
+BJ-7581,Bianca,North,CT,2026-09-04,2026-09-09,2026-09-13,2026-09-19,Confirmed after follow-up
+BJ-7582,Bianca,West,Ultrasound,2026-11-02,2026-11-09,,,Open
+BJ-7583,Dani,Island,CT,2026-10-16,2026-10-22,2026-10-29,2026-11-03,Confirmed after follow-up
+BJ-7584,Alex,East,CT,2026-11-10,2026-11-16,,,Open
+BJ-7585,Alex,Island,MR,2026-09-21,,,2026-09-26,Confirmed first time
+BJ-7586,Bianca,East,CT,2026-09-02,2026-09-07,2026-09-12,2026-09-15,Confirmed after follow-up
+BJ-7587,Callum,South,MR,2026-09-03,2026-09-10,2026-09-16,,Cancellation due
+BJ-7588,Bianca,East,CT,2026-09-11,2026-09-15,2026-09-22,2026-09-26,Confirmed after follow-up
+BJ-7589,Bianca,North,CT,2026-09-14,2026-09-18,2026-09-24,2026-09-28,Confirmed after follow-up
+BJ-7590,Alex,South,Ultrasound,2026-07-31,2026-08-07,,2026-08-09,Confirmed after follow-up
+BJ-7591,Callum,Island,MR,2026-10-14,2026-10-19,,2026-10-26,Confirmed after follow-up
+BJ-7592,Callum,East,Ultrasound,2026-09-11,,,2026-09-16,Confirmed first time
+BJ-7593,Bianca,Island,MR,2026-08-14,2026-08-20,2026-08-24,,Cancellation due
+BJ-7594,Dani,North,X-Ray,2026-07-31,2026-08-07,2026-08-15,2026-08-24,Confirmed after follow-up
+BJ-7595,Callum,East,MR,2026-10-30,,,2026-11-06,Confirmed first time
+BJ-7596,Bianca,West,MR,2026-07-20,,,2026-07-26,Confirmed first time
+BJ-7597,Callum,Island,Ultrasound,2026-11-16,,,,Open
+BJ-7598,Bianca,South,X-Ray,2026-10-14,2026-10-18,,2026-10-23,Confirmed after follow-up
+BJ-7599,Bianca,South,CT,2026-10-09,2026-10-15,,2026-10-21,Confirmed after follow-up

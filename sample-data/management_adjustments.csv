@@ -1,0 +1,6 @@
+Month,Region,Modality,Hours,Reason,ApprovedBy
+2026-12-01,East,CT,40,"Planned install, engineers diverted",Regional Manager
+2027-01-01,East,CT,25,"Planned install, engineers diverted",Regional Manager
+2027-02-01,South,MR,-30,"Contract change, fewer visits",Service Director
+2027-03-01,North,X-Ray,35,Pull-forward of low-priority work approved,Regional Manager
+2027-03-01,Island,Ultrasound,-20,Engineer lent to another region,Service Director

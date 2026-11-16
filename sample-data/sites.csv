@@ -1,0 +1,34 @@
+SiteID,SiteName,Region,City,Latitude,Longitude
+S001,Summit Medical Centre,East,Port Harlow,-33.7975,151.1335
+S002,Parkside Medical Centre,East,Port Harlow,-33.817,151.3277
+S003,Bayview Diagnostic Centre,East,Port Harlow,-33.8934,151.0689
+S004,Ridgeway Regional Hospital,East,Kestrel Bay,-32.9284,151.638
+S005,Ridgeway Diagnostic Centre,East,Kestrel Bay,-32.9541,151.7648
+S006,Cedar Park Medical Centre,East,Kestrel Bay,-32.8524,151.6779
+S007,Kingsway Imaging Clinic,South,Fairhaven,-37.8766,144.8746
+S008,Oakdale Medical Centre,South,Fairhaven,-37.9322,144.839
+S009,Stonebridge Diagnostic Centre,South,Fairhaven,-37.8806,144.823
+S010,Marlow Diagnostic Centre,South,Thornbury,-38.2626,144.4867
+S011,Westfield Diagnostic Centre,South,Thornbury,-38.0344,144.3185
+S012,Ridgeway Medical Centre,South,Thornbury,-38.2863,144.2784
+S013,Westfield Medical Centre,North,Northgate,-27.3634,153.1399
+S014,Fairview Imaging Clinic,North,Northgate,-27.484,153.1302
+S015,Lakeside Imaging Clinic,North,Northgate,-27.5134,153.0811
+S016,Lakeside Diagnostic Centre,North,Cape Verity,-19.1913,146.719
+S017,Meadowbrook Imaging Clinic,North,Cape Verity,-19.1571,146.9028
+S018,Meadowbrook Medical Centre,North,Cape Verity,-19.1685,146.7903
+S019,Bayview Regional Hospital,Central,Westmere,-34.8061,138.6202
+S020,Oakdale Regional Hospital,Central,Westmere,-34.8834,138.5687
+S021,Marlow Regional Hospital,Central,Westmere,-35.0005,138.524
+S022,Cedar Park Diagnostic Centre,West,Sandford,-31.9715,115.8851
+S023,Stonebridge Regional Hospital,West,Sandford,-31.8008,115.7515
+S024,Eastgate Medical Centre,West,Sandford,-31.8733,115.9683
+S025,Parkside Regional Hospital,West,Quarry Bay,-33.2424,115.6166
+S026,Bayview Community Hospital,West,Quarry Bay,-33.3655,115.7888
+S027,Riverbend Medical Centre,West,Quarry Bay,-33.2755,115.6511
+S028,Cedar Park Imaging Clinic,Island,Harbour City,-36.9665,174.7404
+S029,Marlow Medical Centre,Island,Harbour City,-36.7139,174.8728
+S030,Summit Imaging Clinic,Island,Harbour City,-36.7475,174.7623
+S031,Riverbend Diagnostic Centre,Island,Rivermouth,-43.5828,172.4958
+S032,Stonebridge Imaging Clinic,Island,Rivermouth,-43.6082,172.5623
+S033,Bayview Medical Centre,Island,Rivermouth,-43.4604,172.7348
